@@ -1,0 +1,23 @@
+{
+    "name": "subvators-hub",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Tooling workspace for the Subvators Hub project.",
+    "scripts": {
+        "design:help": "designmd --help",
+        "design:spec": "node tools/print-design-spec.mjs",
+        "design:spec:cli": "designmd spec",
+        "design:lint": "designmd lint DESIGN.md",
+        "verify:prototype": "node tools/verify-prototype.mjs",
+        "design:export:css": "designmd export DESIGN.md --format css-tailwind",
+        "design:export:json": "designmd export DESIGN.md --format json-tailwind",
+        "verify:site": "node tools/verify-site-content.mjs",
+        "verify": "npm run verify:site && npm run design:lint -- --format json && npm run verify:prototype"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "@google/design.md": "^0.3.0"
+    }
+}
