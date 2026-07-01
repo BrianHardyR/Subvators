@@ -18,8 +18,16 @@ expect(
   "index.html must identify the Field Atlas design direction."
 );
 expect(
-  index.includes("Grassroots systems made fundable."),
-  "Hero must use the Field Atlas headline."
+  index.includes("Grassroots innovation made") && index.includes("data-hero-word"),
+  "Hero must use the concise animated content-positioning headline."
+);
+expect(
+  css.includes(".hero-title-word::after") && js.includes("const HERO_WORD_HOLD_MS = 2600;") && js.includes("heroWord.textContent = word.slice(0, nextLength);"),
+  "Hero must animate the final headline word."
+);
+expect(
+  !index.includes("Grassroots systems made fundable."),
+  "Hero must not use the old Field Atlas placeholder headline."
 );
 expect(
   (index.match(/class="[^"]*\bledger-row\b/g) || []).length >= 5,

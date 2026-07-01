@@ -52,6 +52,18 @@ function requireCssRuleIncludes(label, selector, needle) {
   else failures.push(label + ': missing "' + needle + '" in ' + selector + ' rule');
 }
 
+const heroMarkup = html.match(/<section class="atlas-hero"[\s\S]*?<\/section>/)?.[0] || '';
+
+function requireHeroIncludes(label, needle) {
+  if (heroMarkup.includes(needle)) pass.push(label);
+  else failures.push(label + ': missing hero token "' + needle + '"');
+}
+
+function requireHeroNotIncludes(label, needle) {
+  if (!heroMarkup.includes(needle)) pass.push(label);
+  else failures.push(label + ': forbidden hero token "' + needle + '"');
+}
+
 requireIncludes('first nav label about us', '<a href="#field">About Us</a>');
 requireIncludes('first section mode about us', 'data-section-name="ABOUT US"');
 requireIncludes('initial rail label about us', '<span class="rail-kicker" data-rail-mode>ABOUT US</span>');
@@ -59,7 +71,19 @@ requireNotIncludes('old first nav field label removed', '<a href="#field">Field<
 requireNotIncludes('old first section field mode removed', 'data-section-name="FIELD"');
 requireNotIncludes('old initial rail field label removed', '<span class="rail-kicker" data-rail-mode>FIELD</span>');
 requireIncludes('hero eyebrow', 'Kenya-based grassroots innovation organisation');
-requireIncludes('hero headline', 'Grassroots systems made fundable.');
+requireHeroIncludes('hero concise headline fixed copy', 'Grassroots innovation made');
+requireHeroIncludes('hero animated word hook', 'data-hero-word');
+requireHeroIncludes('hero animated word options', 'data-hero-words="visible,credible,fundable"');
+requireHeroIncludes('hero accessible headline text', 'Grassroots innovation made visible, credible and fundable.');
+requireHeroNotIncludes('old long hero h1 removed', '<h1 id="hero-title">Subvators Hub makes grassroots innovation visible, credible and fundable.</h1>');
+requireSiteIncludes('hero word cursor pseudo element', '.hero-title-word::after');
+requireSiteIncludes('hero word cursor sits after text', 'display: inline-block;');
+requireSiteIncludes('hero word longer read hold', 'const HERO_WORD_HOLD_MS = 2600;');
+requireSiteIncludes('hero word measured typing text slices', 'heroWord.textContent = word.slice(0, nextLength);');
+requireSiteIncludes('hero word script', 'data-hero-word');
+requireSiteNotIncludes('hero word fixed ch cursor removed', '--hero-word-ch');
+requireSiteNotIncludes('hero word border cursor removed', 'border-right: 0.06em solid currentColor;')
+requireNotIncludes('old hero systems headline removed', 'Grassroots systems made fundable.');
 requireIncludes('hero lead', 'Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.');
 requireIncludes('organisation positioning', 'Subvators Hub is a Kenya-based catalytic organisation');
 requireIncludes('core idea', 'visible, credible and fundable');

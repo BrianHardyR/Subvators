@@ -66,7 +66,7 @@ Meta description:
 Subvators Hub is a Kenya-based grassroots innovation and partnership organisation helping community-rooted actors become visible, credible and fundable through strategic partnerships, institutional support, action-policy research and evidence systems.
 
 Open Graph title:
-Subvators Hub - Grassroots systems made fundable
+Subvators Hub - Grassroots innovation made visible, credible and fundable
 
 Open Graph description:
 A Kenya-based catalytic organisation connecting local innovators, community organisations, donors, universities and policymakers around health, livelihoods, protection and Earth-centred change.
@@ -107,7 +107,10 @@ Eyebrow:
 Kenya-based grassroots innovation organisation
 
 Headline:
-Grassroots systems made fundable.
+Grassroots innovation made visible, credible and fundable.
+
+Hero animation note:
+Keep "Grassroots innovation made" fixed and rotate the final word through visible, credible and fundable.
 
 Lead:
 Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.

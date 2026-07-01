@@ -9,6 +9,8 @@ const railMode = document.querySelector("[data-rail-mode]");
 const sectionEls = document.querySelectorAll("[data-section]");
 const heroLedgerRows = document.querySelectorAll(".partner-ledger .ledger-row");
 const atlasLabel = document.querySelector("[data-atlas-label]");
+const heroWord = document.querySelector("[data-hero-word]");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 function syncHeader() {
   if (!header) return;
@@ -70,7 +72,56 @@ if ("IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
+const HERO_WORD_TYPE_MS = 76;
+const HERO_WORD_HOLD_MS = 2600;
+const heroWords = heroWord?.dataset.heroWords?.split(",").map((word) => word.trim()).filter(Boolean) || [];
+let heroWordIndex = 0;
+let heroWordTimer = null;
 
+function queueNextHeroWord() {
+  if (!heroWord || heroWords.length <= 1 || reduceMotion.matches) return;
+  heroWordTimer = window.setTimeout(advanceHeroWord, HERO_WORD_HOLD_MS);
+}
+
+function setHeroWord(word, animate = true) {
+  if (!heroWord) return;
+  if (heroWordTimer) window.clearTimeout(heroWordTimer);
+
+  if (reduceMotion.matches || !animate) {
+    heroWord.textContent = word;
+    heroWord.classList.remove("is-typing");
+    return;
+  }
+
+  let nextLength = 0;
+  heroWord.textContent = "";
+  heroWord.classList.add("is-typing");
+
+  function typeNextCharacter() {
+    nextLength += 1;
+    heroWord.textContent = word.slice(0, nextLength);
+
+    if (nextLength < word.length) {
+      heroWordTimer = window.setTimeout(typeNextCharacter, HERO_WORD_TYPE_MS);
+      return;
+    }
+
+    heroWord.classList.remove("is-typing");
+    queueNextHeroWord();
+  }
+
+  typeNextCharacter();
+}
+
+function advanceHeroWord() {
+  heroWordIndex = (heroWordIndex + 1) % heroWords.length;
+  setHeroWord(heroWords[heroWordIndex]);
+}
+
+if (heroWord && heroWords.length) {
+  setHeroWord(heroWords[0], false);
+  queueNextHeroWord();
+}
 
 const heroPartnerImages = {
   primary: document.querySelector('[data-atlas-image="primary"]'),
@@ -133,7 +184,6 @@ if (partnerModule) {
   });
 }
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 let parallaxFrame = null;
 
 window.addEventListener(
