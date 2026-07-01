@@ -70,10 +70,50 @@ if ("IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-visible"));
 }
 
+
+
+const heroPartnerImages = {
+  primary: document.querySelector('[data-atlas-image="primary"]'),
+  secondary: document.querySelector('[data-atlas-image="secondary"]'),
+  proof: document.querySelector('[data-atlas-image="proof"]'),
+};
+
+function switchHeroPartnerImages(row) {
+  if (!atlasObject) return;
+
+  const updates = [
+    [heroPartnerImages.primary, row.dataset.imagePrimary, row.dataset.altPrimary],
+    [heroPartnerImages.secondary, row.dataset.imageSecondary, row.dataset.altSecondary],
+    [heroPartnerImages.proof, row.dataset.imageProof, row.dataset.altProof],
+  ].filter(([image, src]) => image && src);
+
+  if (!updates.length) return;
+
+  const applyImages = () => {
+    updates.forEach(([image, src, alt]) => {
+      image.classList.remove('is-entering');
+      image.src = src;
+      image.alt = alt || '';
+      void image.offsetWidth;
+      image.classList.add('is-entering');
+    });
+    atlasObject.classList.remove('is-switching');
+  };
+
+  if (reduceMotion.matches) {
+    applyImages();
+    return;
+  }
+
+  atlasObject.classList.add('is-switching');
+  window.setTimeout(applyImages, 170);
+}
+
 heroLedgerRows.forEach((row) => {
   row.addEventListener("click", () => {
     heroLedgerRows.forEach((item) => item.classList.toggle("is-active", item === row));
-    if (atlasLabel) atlasLabel.textContent = row.dataset.partner || "Partner ecosystem";
+    if (atlasLabel) atlasLabel.textContent = row.dataset.partnerLabel || row.dataset.partner || "Partner ecosystem";
+    switchHeroPartnerImages(row);
   });
 });
 
