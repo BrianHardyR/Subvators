@@ -885,3 +885,85 @@ button { font: inherit; }
   .story-card-large { grid-template-rows: 260px minmax(0, 1fr); }
   .founder-mark { min-height: 260px; }
 }
+
+
+/* Mobile overflow guardrails */
+@media (max-width: 720px) {
+  .atlas-hero > *,
+  .hero-copy,
+  .field-rail,
+  .proof-strip,
+  .atlas-object,
+  .partner-ledger,
+  .section,
+  .site-footer {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .eyebrow,
+  .proof-strip dd,
+  .proof-strip dt,
+  .hero-copy p:not(.eyebrow),
+  .ledger-row strong,
+  .ledger-row em {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .proof-strip div { overflow: hidden; }
+  .rail-kicker { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .atlas-object { overflow: hidden; height: 520px; min-height: 520px; }
+  .object-card-primary { left: 0; width: 66%; }
+  .object-card-secondary { right: 0; width: 56%; }
+  .object-card-proof { left: 5%; width: 60%; }
+  .object-note-top { max-width: calc(100% - 32px); }
+  .object-note-bottom { max-width: 164px; }
+}
+
+
+/* Mobile viewport width correction */
+@media (max-width: 720px) {
+  .page-frame,
+  .atlas-hero {
+    max-width: 100vw;
+    overflow: hidden;
+  }
+
+  .field-rail,
+  .hero-copy,
+  .proof-strip,
+  .atlas-object,
+  .partner-ledger {
+    width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+
+  .eyebrow {
+    max-width: calc(100vw - 32px);
+    font-size: 0.68rem;
+    line-height: 1.35;
+    letter-spacing: 0.02em;
+  }
+
+  .proof-strip dd {
+    font-size: 0.64rem;
+    line-height: 1.2;
+  }
+}
+
+
+/* Mobile text line-length correction */
+@media (max-width: 720px) {
+  .hero-copy h1 { max-width: 9.4ch; }
+  .eyebrow { max-width: 34ch; }
+  .hero-copy p:not(.eyebrow) {
+    max-width: 32ch;
+    font-size: 0.96rem;
+    line-height: 1.55;
+  }
+
+  .proof-strip dd {
+    max-width: 17ch;
+  }
+}

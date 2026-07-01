@@ -5,6 +5,7 @@ import path from 'node:path';
 const root = process.cwd();
 const htmlPath = path.join(root, 'index.html');
 const vercelPath = path.join(root, 'vercel.json');
+const vercelIgnorePath = path.join(root, '.vercelignore');
 const html = await readFile(htmlPath, 'utf8');
 const normalizedHtml = html.replace(/\s+/g, ' ');
 const normalizedText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
@@ -77,6 +78,16 @@ if (!existsSync(vercelPath)) {
   else failures.push('vercel cleanUrls: expected true');
   if (Array.isArray(vercel.headers) && vercel.headers.length >= 2) pass.push('vercel headers');
   else failures.push('vercel headers: expected security and asset cache headers');
+}
+
+if (!existsSync(vercelIgnorePath)) {
+  failures.push('vercel ignore: missing .vercelignore');
+} else {
+  const vercelIgnore = await readFile(vercelIgnorePath, 'utf8');
+  for (const ignoredPath of ['docs/', 'preview/', 'tools/', 'inspirations/']) {
+    if (vercelIgnore.includes(ignoredPath)) pass.push('vercel ignores ' + ignoredPath);
+    else failures.push('vercel ignore: missing ' + ignoredPath);
+  }
 }
 
 const ascii = /^[\x00-\x7F]*$/.test(html);

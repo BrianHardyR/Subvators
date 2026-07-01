@@ -1,0 +1,11 @@
+docs/
+inspirations/
+preview/
+tools/
+.agents/
+.codex/
+.git/
+node_modules/
+*.log
+.env
+.env.*
