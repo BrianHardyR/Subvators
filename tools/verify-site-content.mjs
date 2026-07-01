@@ -14,6 +14,7 @@ const js = await readFile(jsPath, 'utf8');
 const normalizedHtml = html.replace(/\s+/g, ' ');
 const normalizedText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
 const searchableHtml = normalizedHtml + ' ' + normalizedText;
+const searchableSite = searchableHtml + ' ' + css + ' ' + js;
 
 const failures = [];
 const pass = [];
@@ -33,6 +34,30 @@ function requireFile(label, filePath) {
   else failures.push(label + ': missing ' + filePath);
 }
 
+function requireSiteIncludes(label, needle) {
+  if (searchableSite.includes(needle)) pass.push(label);
+  else failures.push(label + ': missing site token "' + needle + '"');
+}
+
+function requireSiteNotIncludes(label, needle) {
+  if (!searchableSite.includes(needle)) pass.push(label);
+  else failures.push(label + ': forbidden site token "' + needle + '"');
+}
+
+function requireCssRuleIncludes(label, selector, needle) {
+  const selectorIndex = css.indexOf(selector + ' {');
+  const ruleEnd = selectorIndex === -1 ? -1 : css.indexOf('}', selectorIndex);
+  const rule = selectorIndex === -1 || ruleEnd === -1 ? '' : css.slice(selectorIndex, ruleEnd + 1);
+  if (rule.includes(needle)) pass.push(label);
+  else failures.push(label + ': missing "' + needle + '" in ' + selector + ' rule');
+}
+
+requireIncludes('first nav label about us', '<a href="#field">About Us</a>');
+requireIncludes('first section mode about us', 'data-section-name="ABOUT US"');
+requireIncludes('initial rail label about us', '<span class="rail-kicker" data-rail-mode>ABOUT US</span>');
+requireNotIncludes('old first nav field label removed', '<a href="#field">Field</a>');
+requireNotIncludes('old first section field mode removed', 'data-section-name="FIELD"');
+requireNotIncludes('old initial rail field label removed', '<span class="rail-kicker" data-rail-mode>FIELD</span>');
 requireIncludes('hero eyebrow', 'Kenya-based grassroots innovation organisation');
 requireIncludes('hero headline', 'Grassroots systems made fundable.');
 requireIncludes('hero lead', 'Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.');
@@ -40,13 +65,21 @@ requireIncludes('organisation positioning', 'Subvators Hub is a Kenya-based cata
 requireIncludes('core idea', 'visible, credible and fundable');
 requireIncludes('proof point orgs', '5 locally led organisations supported');
 requireIncludes('proof point cbos', '40+ CBO initiatives reached');
+requireCssRuleIncludes('proof strip desktop avoids squeezed labels', '.proof-strip', 'grid-template-columns: repeat(2, minmax(0, 1fr));');
 requireIncludes('operating model observe', 'Field evidence and community realities');
 requireIncludes('operating model strengthen', 'Institutional development');
 requireIncludes('value strategic partnerships', 'Strategic partnership development');
 requireIncludes('value institutional strengthening', 'Institutional strengthening');
 requireIncludes('value action policy', 'Action-policy research and citizen dialogue');
 requireIncludes('value ai secondary', 'AI-enabled systems and advisory');
-requireIncludes('ledger headline', 'A numbered ecosystem index, not a card grid.');
+requireIncludes('hero see partners CTA', 'See partners');
+requireIncludes('hero partner with us CTA', 'Partner with us');
+requireNotIncludes('old hero partner CTA removed', 'Meet the partners');
+requireNotIncludes('old hero concept CTA removed', 'Start a concept');
+requireIncludes('systems public label', 'How Subvators works');
+requireIncludes('value public label', 'How Subvators adds value');
+requireIncludes('partner ecosystem label', 'Partner ecosystem');
+requireIncludes('partner ecosystem headline', 'Local partners connecting health, livelihoods, protection and Earth-centred resilience.');
 requireIncludes('COTRR description', 'works directly with communities and families to strengthen resilience');
 requireIncludes('YADEN description', 'equips young people to lead change through civic engagement');
 requireIncludes('Spills description', 'distinctive health and wellness dimension');
@@ -61,12 +94,21 @@ requireIncludes('My Guardian link', 'https://services.myguardian.mobi/');
 requireIncludes('Carledorian link', 'https://carledorian.com/');
 requireIncludes('evidence systems public copy', 'Community dialogue, restorative wellness and food enterprise evidence show how partner work becomes stronger, clearer and more fundable.');
 requireIncludes('founder confirmed name', 'Lucy Den Teuling founded Subvators Hub');
-requireIncludes('advisory headline', 'Build the concept, prove the case, connect the coalition.');
+requireIncludes('advisory headline', 'Turn community priorities into fundable partnerships.');
+requireNotIncludes('old advisory headline removed', 'Build the concept, prove the case, connect the coalition.');
 requireIncludes('contact headline', 'Make grassroots innovation visible, credible and fundable.');
 requireIncludes('static script', '<script src="script.js"></script>');
 requireNotIncludes('old platform eyebrow', 'Kenya-based grassroots innovation platform');
 requireNotIncludes('old platform meta', 'partnership platform for health, wealth and Earth');
 requireNotIncludes('old viability headline', 'Building fundable, viable and scalable grassroots innovations');
+requireNotIncludes('wireframe partner section label removed', 'Partner ledger');
+requireNotIncludes('wireframe partner CTA removed', 'Open partner ledger');
+requireNotIncludes('wireframe partner headline removed', 'A numbered ecosystem index, not a card grid.');
+requireNotIncludes('wireframe systems label removed', 'Operating layer');
+requireNotIncludes('wireframe value label removed', 'What Subvators builds');
+requireNotIncludes('workflow platform wording removed', 'workflow tools');
+requireNotIncludes('hidden approval placeholder removed', 'Evidence stories pending final approval.');
+requireNotIncludes('visual object aria wording removed', 'Subvators ecosystem visual object');
 
 requireNotIncludes('no post assets in live page', 'images/posters/');
 requireNotIncludes('hidden draft story title removed', 'Four story objects for the first content pass.');
@@ -75,7 +117,10 @@ requireNotIncludes('draft confirmation copy hidden', 'Confirm event dates, image
 requireNotIncludes('royal wording hidden from live page', 'royal-family');
 requireNotIncludes('draft story global engagement hidden', 'global engagement');
 requireNotIncludes('founder name no longer marked unconfirmed', 'Confirm founder name spelling before publishing');
-requireIncludes('stories section hidden', '<section class="section stories-section" hidden');
+requireNotIncludes('stories section no longer hidden', '<section class="section stories-section" hidden');
+requireNotIncludes('stories section aria hidden removed', 'aria-hidden="true" data-section="04/05" data-section-name="EVIDENCE" aria-labelledby="stories-title"');
+requireSiteNotIncludes('old story grid CSS removed', '.story-grid');
+requireSiteNotIncludes('old story card CSS removed', '.story-card')
 const brandMarkup = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] || '';
 if (brandMarkup.includes('src="images/logo.PNG"')) pass.push('navigation uses full logo');
 else failures.push('navigation logo: expected images/logo.PNG full logo');
@@ -87,6 +132,23 @@ else failures.push('founder section image: still uses logo placeholder');
 
 
 requireIncludes('evidence content headline', 'Evidence. Innovation. Accountability. Real impact.');
+requireNotIncludes('evidence stories visible headline removed', 'Proof as field objects.');
+requireNotIncludes('evidence stories visible body removed', 'approved event imagery, short labels and movement');
+requireNotIncludes('evidence stories left index rows removed', 'Youth dialogue and civic voice');
+requireIncludes('evidence stories accessible title', 'Evidence stories image mosaic');
+requireIncludes('evidence stories added YADEN image', 'story-photo story-yaden-board');
+requireIncludes('evidence stories added Spills image', 'story-photo story-spills-garden');
+requireIncludes('evidence stories added enterprise image', 'story-photo story-enterprise-detail');
+requireIncludes('evidence stories mosaic markup', 'data-story-mosaic');
+requireIncludes('evidence stories hero tile', 'story-photo story-hero');
+requireIncludes('evidence stories contact object', 'edge-object');
+requireSiteIncludes('global display font token', '--display-font: Georgia, "Times New Roman", serif;');
+requireSiteIncludes('global display size token', '--display-size: clamp(2.55rem, 4.5vw, 4.8rem);');
+requireSiteIncludes('global display line height token', '--display-line-height: 0.96;');
+requireSiteIncludes('headings use display font', 'font-family: var(--display-font);');
+requireSiteIncludes('story mosaic mask animation', '@keyframes storyMaskIn');
+requireSiteIncludes('story mosaic drift animation', '@keyframes storyImageDrift');
+requireSiteIncludes('story mosaic contact animation', '@keyframes storyContactDrift');
 requireIncludes('evidence content body', 'Subvators uses field evidence, partner activity and practical evidence systems to help local organisations listen, learn and improve.');
 requireNotIncludes('wireframe evidence headline removed', 'Proof sits in the layout as objects, not decoration.');
 requireNotIncludes('wireframe evidence body removed', "Evidence objects connect the organisation's claims to actual");
