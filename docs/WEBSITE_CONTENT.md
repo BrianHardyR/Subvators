@@ -46,7 +46,6 @@ Local source documents:
 
 Local image source folders:
 - images/logo.PNG
-- images/posters/
 - images/events/Carledorian/
 - images/events/Spills of Eden/
 - images/events/Yaden East Africa/
@@ -55,7 +54,7 @@ Local image source folders:
 Web research status:
 - Partner public links are limited to official websites and social media links only.
 - User-provided Subvators social links are included separately because their canonical public page URLs should be confirmed.
-- Founder spelling needs confirmation: local notes use both Ludy Den Teuling and Lucy Den Teuling. Use Lucy Den Teuling only after confirmation.
+- Founder spelling is confirmed. Use Lucy Den Teuling.
 
 ## SEO And Metadata
 
@@ -86,8 +85,8 @@ Primary keywords:
 ## Navigation
 
 Recommended navigation labels:
-- Field
-- Ledger
+- About Us
+- Partners
 - Evidence
 - Advisory
 - Partner
@@ -113,16 +112,13 @@ Hero animation note:
 Keep "Grassroots innovation made" fixed and rotate the final word through visible, credible and fundable.
 
 Lead:
-Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.
-
-Expanded lead option:
 We strengthen community-rooted organisations so local solutions can become visible, credible, fundable and influential in the systems that shape public health, livelihoods, protection and opportunity.
 
 Primary CTA:
-Open partner ledger
+See partners
 
 Secondary CTA:
-Start a concept
+Partner with us
 
 Proof points:
 - 5 locally led organisations supported
@@ -171,7 +167,7 @@ At community level, these pressures show up in poor diets, unsafe migration, ina
 ## Operating Model
 
 Section label:
-Operating layer
+How Subvators works
 
 Headline:
 From community promise to system-level impact.
@@ -217,12 +213,12 @@ Title:
 Evidence-led learning and reform
 
 Copy:
-We support research, dashboards, workflow tools and feedback loops that help partners improve decisions and demonstrate impact.
+We support research, dashboards, coordination tools and feedback loops that help partners improve decisions and demonstrate impact.
 
 ## How Subvators Adds Value
 
 Section label:
-What Subvators builds
+How Subvators adds value
 
 Headline:
 Practical support for credible locally led change.
@@ -239,18 +235,18 @@ Supporting governance, finance, compliance, fundraising readiness and organisati
 Linking community evidence, citizen voice and practical reform conversations so local realities influence policy and practice.
 
 4. AI-enabled systems and advisory
-Applying AI-supported learning, dashboards, workflow tools and light automation to strengthen coordination, evidence use and decision support.
+Applying AI-supported learning, dashboards, coordination tools and light automation to strengthen coordination, evidence use and decision support.
 
 5. Inclusive innovation and advocacy
 Connecting local innovators, women-led enterprise, youth leadership and community knowledge to healthier outcomes and wider influence.
 
-## Partner Ledger
+## Partner Ecosystem
 
 Section label:
-Partner ledger
+Partner ecosystem
 
 Headline:
-A numbered ecosystem index, not a card grid.
+Local partners connecting health, livelihoods, protection and Earth-centred resilience.
 
 Intro:
 The Subvators ecosystem brings together local delivery, youth mobilisation, wellness enterprise, digital protection and value-chain innovation. Each partner adds a different strength to a shared vision: stronger health, livelihoods, protection, citizen voice and Earth-centred resilience.
@@ -368,9 +364,6 @@ The YADEN East Africa evidence set shows Subvators' role in helping grassroots p
 
 Suggested assets:
 - images/events/Yaden East Africa/
-- images/posters/426B6E5F-6E70-4A99-B0B0-431369103B9C.PNG
-- images/posters/6B62F506-1C40-4419-8805-0C621F09FF35.PNG
-- images/posters/BA005CAF-278D-4237-A344-100DA4D3C7B1.PNG
 
 Publishing note:
 Confirm all royal-family wording, image rights and event dates before publishing.
@@ -391,7 +384,6 @@ This story can show how Subvators supports partners beyond visibility: shaping s
 
 Suggested assets:
 - images/events/Spills of Eden/
-- images/posters/7B422D37-E136-4F53-9B82-0A75B59F789F.PNG
 
 Publishing note:
 Confirm the CEO/founder name and approved portrait. Do not use a blurred-face image as the identity-bearing profile image.
@@ -430,16 +422,14 @@ Long copy:
 This story should make technology secondary to mission. The message is not that Subvators is an app platform. The message is that responsible tools can strengthen coordination, dashboards, learning loops and better decisions when they are grounded in community realities.
 
 Suggested assets:
-- images/posters/0AF757FA-80BA-4869-A9E5-0907E3A5F9E7.PNG
-- images/posters/E33443ED-357D-4F32-B9A4-3F26D2B89683.PNG
 
 ## Founder Content
 
 Name:
 Lucy Den Teuling
 
-Name confirmation needed:
-Local notes include both Ludy Den Teuling and Lucy Den Teuling. Confirm spelling before publishing.
+Name confirmed:
+Use Lucy Den Teuling.
 
 Role:
 Founder and Lead Visionary, Subvators Hub
@@ -474,7 +464,7 @@ Section label:
 Strategic advisory
 
 Headline:
-Build the concept, prove the case, connect the coalition.
+Turn community priorities into fundable partnerships.
 
 Body:
 Subvators helps partners translate community priorities into practical collaboration designs. This includes fundraising readiness, innovation hubs, university linkages, North-South collaboration, action-policy research and responsible AI integration.
@@ -571,24 +561,20 @@ Use the official website as primary. No social media link is included until a cu
 Use images as evidence objects rather than decoration.
 
 Hero object candidates:
-- images/posters/232FCB4C-2701-40E5-881C-9DF51AF1D2D8.PNG
-- images/posters/0AF757FA-80BA-4869-A9E5-0907E3A5F9E7.PNG
-- images/events/Carledorian/WhatsApp Image 2026-06-29 at 12.59.27 (2).jpeg
+- images/events/Yaden East Africa/WhatsApp Image 2026-06-30 at 23.41.47.jpeg
+- images/events/Spills of Eden/WhatsApp Image 2026-06-30 at 17.24.02.jpeg
+- images/events/Carledorian/WhatsApp Image 2026-06-29 at 13.02.37.jpeg
 
 Evidence section candidates:
-- images/posters/0AF757FA-80BA-4869-A9E5-0907E3A5F9E7.PNG
-- images/posters/D62206FA-DFC1-4C6F-A1E9-DC69F82BEDBF.PNG
+- images/events/Yaden East Africa/WhatsApp Image 2026-06-30 at 23.41.47.jpeg
+- images/events/Spills of Eden/WhatsApp Image 2026-06-30 at 23.43.52.jpeg
 - images/events/Carledorian/WhatsApp Image 2026-06-29 at 12.59.26 (1).jpeg
 
 YADEN story candidates:
 - images/events/Yaden East Africa/
-- images/posters/426B6E5F-6E70-4A99-B0B0-431369103B9C.PNG
-- images/posters/6B62F506-1C40-4419-8805-0C621F09FF35.PNG
-- images/posters/BA005CAF-278D-4237-A344-100DA4D3C7B1.PNG
 
 Spills story candidates:
 - images/events/Spills of Eden/
-- images/posters/7B422D37-E136-4F53-9B82-0A75B59F789F.PNG
 
 Carledorian story candidates:
 - images/events/Carledorian/WhatsApp Image 2026-06-29 at 12.59.26 (1).jpeg
@@ -601,16 +587,15 @@ Founder candidates:
 Image rules:
 - Do not use blurred-face images as identity-bearing content.
 - Use group/event photos only when faces are intentionally blurred or usage permission is confirmed.
-- Prefer product, field, branded poster and activity-detail images for the first implementation pass.
+- Prefer product, field and activity-detail images for the first implementation pass. Do not use poster assets on the live site.
 - Keep source images intact; create optimized derivatives later.
 
 ## Open Content Questions Before Production
 
-1. Confirm final founder name spelling: Lucy Den Teuling or Ludy Den Teuling.
-2. Confirm official Subvators email and contact details.
-3. Confirm canonical Facebook page URL for Subvators.
-4. Confirm whether the current Instagram handle should be public on the website.
-5. Confirm permissions for Dutch Royal Family event language and imagery.
-6. Confirm Spills of Eden CEO/founder name and approved profile image.
-7. Confirm whether Atlas Network USA support should be named on the public website.
-8. Confirm whether partner impact numbers should stay at profile level only or include partner-specific numbers.
+1. Confirm official Subvators email and contact details.
+2. Confirm canonical Facebook page URL for Subvators.
+3. Confirm whether the current Instagram handle should be public on the website.
+4. Confirm permissions for Dutch Royal Family event language and imagery.
+5. Confirm Spills of Eden CEO/founder name and approved profile image.
+6. Confirm whether Atlas Network USA support should be named on the public website.
+7. Confirm whether partner impact numbers should stay at profile level only or include partner-specific numbers.

@@ -8,9 +8,11 @@ const cssPath = path.join(root, 'styles.css');
 const jsPath = path.join(root, 'script.js');
 const vercelPath = path.join(root, 'vercel.json');
 const vercelIgnorePath = path.join(root, '.vercelignore');
+const contentPath = path.join(root, 'docs', 'WEBSITE_CONTENT.md');
 const html = await readFile(htmlPath, 'utf8');
 const css = await readFile(cssPath, 'utf8');
 const js = await readFile(jsPath, 'utf8');
+const contentSource = await readFile(contentPath, 'utf8');
 const normalizedHtml = html.replace(/\s+/g, ' ');
 const normalizedText = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ');
 const searchableHtml = normalizedHtml + ' ' + normalizedText;
@@ -42,6 +44,16 @@ function requireSiteIncludes(label, needle) {
 function requireSiteNotIncludes(label, needle) {
   if (!searchableSite.includes(needle)) pass.push(label);
   else failures.push(label + ': forbidden site token "' + needle + '"');
+}
+
+function requireContentIncludes(label, needle) {
+  if (contentSource.includes(needle)) pass.push(label);
+  else failures.push(label + ': missing content source token "' + needle + '"');
+}
+
+function requireContentNotIncludes(label, needle) {
+  if (!contentSource.includes(needle)) pass.push(label);
+  else failures.push(label + ': forbidden content source token "' + needle + '"');
 }
 
 function requireCssRuleIncludes(label, selector, needle) {
@@ -84,8 +96,11 @@ requireSiteIncludes('hero word script', 'data-hero-word');
 requireSiteNotIncludes('hero word fixed ch cursor removed', '--hero-word-ch');
 requireSiteNotIncludes('hero word border cursor removed', 'border-right: 0.06em solid currentColor;')
 requireNotIncludes('old hero systems headline removed', 'Grassroots systems made fundable.');
-requireIncludes('hero lead', 'Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.');
-requireIncludes('organisation positioning', 'Subvators Hub is a Kenya-based catalytic organisation');
+requireIncludes('hero lead', 'We strengthen community-rooted organisations so local solutions can become visible, credible, fundable and influential in the systems that shape public health, livelihoods, protection and opportunity.');
+requireNotIncludes('old hero lead removed', 'Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.');
+requireContentIncludes('organisation positioning source', 'Subvators Hub is a Kenya-based catalytic organisation that strengthens community-rooted organisations');
+requireIncludes('overview source body', 'Subvators Hub supports locally led organisations that are already close to the challenge.');
+requireIncludes('overview to-date body', 'To date, Subvators Hub has supported five locally led organisations that together reach more than 40 CBO initiatives and growing.');
 requireIncludes('core idea', 'visible, credible and fundable');
 requireIncludes('proof point orgs', '5 locally led organisations supported');
 requireIncludes('proof point cbos', '40+ CBO initiatives reached');
@@ -101,6 +116,8 @@ requireIncludes('hero partner with us CTA', 'Partner with us');
 requireNotIncludes('old hero partner CTA removed', 'Meet the partners');
 requireNotIncludes('old hero concept CTA removed', 'Start a concept');
 requireIncludes('systems public label', 'How Subvators works');
+requireIncludes('why matters headline', 'Community-rooted actors need stronger routes into influence, funding and reform.');
+requireIncludes('why matters bridge sentence', 'Subvators works in this gap by helping local organisations become visible, credible, fundable and influential.');
 requireIncludes('value public label', 'How Subvators adds value');
 requireIncludes('partner ecosystem label', 'Partner ecosystem');
 requireIncludes('partner ecosystem headline', 'Local partners connecting health, livelihoods, protection and Earth-centred resilience.');
@@ -118,6 +135,7 @@ requireIncludes('My Guardian link', 'https://services.myguardian.mobi/');
 requireIncludes('Carledorian link', 'https://carledorian.com/');
 requireIncludes('evidence systems public copy', 'Community dialogue, restorative wellness and food enterprise evidence show how partner work becomes stronger, clearer and more fundable.');
 requireIncludes('founder confirmed name', 'Lucy Den Teuling founded Subvators Hub');
+requireIncludes('founder role', 'Founder and Lead Visionary, Subvators Hub');
 requireIncludes('advisory headline', 'Turn community priorities into fundable partnerships.');
 requireNotIncludes('old advisory headline removed', 'Build the concept, prove the case, connect the coalition.');
 requireIncludes('contact headline', 'Make grassroots innovation visible, credible and fundable.');
@@ -177,6 +195,14 @@ requireIncludes('evidence content body', 'Subvators uses field evidence, partner
 requireNotIncludes('wireframe evidence headline removed', 'Proof sits in the layout as objects, not decoration.');
 requireNotIncludes('wireframe evidence body removed', "Evidence objects connect the organisation's claims to actual");
 requireNotIncludes('internal technology guardrail removed', 'Make technology secondary to mission.');
+requireContentIncludes('content source founder confirmed', 'Name confirmed:\nUse Lucy Den Teuling.');
+requireContentIncludes('content source current hero lead', 'Lead:\nWe strengthen community-rooted organisations so local solutions can become visible, credible, fundable and influential');
+requireContentIncludes('content source current hero CTA primary', 'Primary CTA:\nSee partners');
+requireContentIncludes('content source current hero CTA secondary', 'Secondary CTA:\nPartner with us');
+requireContentNotIncludes('content source no poster asset paths', 'images/posters/');
+requireContentNotIncludes('content source old field nav removed', 'Recommended navigation labels:\n- Field');
+requireContentNotIncludes('content source old partner ledger label removed', 'Section label:\nPartner ledger');
+requireContentNotIncludes('content source old advisory headline removed', 'Headline:\nBuild the concept, prove the case, connect the coalition.');
 
 const atlasMarkup = html.match(/<div class="atlas-object[\s\S]*?<\/div>\s*<div class="partner-ledger"/)?.[0] || '';
 if (/src="images\/posters\//.test(atlasMarkup)) failures.push('hero partner images: atlas object still uses poster assets');
@@ -184,6 +210,10 @@ else pass.push('hero partner images use non-poster assets');
 requireIncludes('hero image switch data primary', 'data-image-primary=');
 requireIncludes('hero image switch data secondary', 'data-image-secondary=');
 requireIncludes('hero image switch data proof', 'data-image-proof=');
+requireSiteIncludes('partner strip mobile horizontal scroll', 'grid-auto-flow: column;');
+requireSiteIncludes('partner strip mobile card width', 'grid-auto-columns: minmax(220px, 76vw);');
+requireSiteIncludes('partner strip mobile snap', 'scroll-snap-type: x mandatory;');
+requireSiteIncludes('partner strip rows snap', 'scroll-snap-align: start;');
 if (js.includes('heroPartnerImages') && js.includes('switchHeroPartnerImages') && js.includes('is-switching')) pass.push('hero image switcher script');
 else failures.push('hero image switcher script: missing partner image switch behavior');
 if (css.includes('.brand-mark img') && css.includes('.object-medallion img') && css.includes('object-fit: contain')) pass.push('logo render contains full artwork');

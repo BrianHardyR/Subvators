@@ -643,7 +643,21 @@ button { font: inherit; }
   .object-medallion { top: 42%; left: 34%; width: 116px; height: 116px; border-width: 8px; }
   .object-note-top { top: 0; left: 0; right: auto; }
   .object-note-bottom { left: 0; right: auto; bottom: 0; max-width: 176px; border-radius: 8px; white-space: normal; }
-  .partner-ledger { grid-column: auto; grid-template-columns: 1fr; box-shadow: none; }
+  .partner-ledger {
+    grid-column: auto;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(220px, 76vw);
+    grid-template-columns: none;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: none;
+  }
+  .partner-ledger .ledger-row {
+    min-height: 108px;
+    scroll-snap-align: start;
+  }
   .ledger-row { min-height: 82px; }
   .section { padding: 68px 16px; }
   .section h2,
@@ -749,6 +763,14 @@ button { font: inherit; }
   border-radius: 8px;
   padding: clamp(20px, 3vw, 30px);
   background: rgba(251, 250, 245, 0.72);
+}
+
+.terrain-note h3 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-size: clamp(1.18rem, 2vw, 1.65rem);
+  font-weight: 950;
+  line-height: 1.08;
 }
 
 .terrain-note p:not(.section-label) {
