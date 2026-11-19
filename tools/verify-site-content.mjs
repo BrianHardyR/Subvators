@@ -119,7 +119,7 @@ requireIncludes('Carledorian description', 'BarakaBlend coffee and wider African
 requireIncludes('COTRR link', 'https://cotrr-africa.org/');
 requireIncludes('YADEN link', 'https://www.yadeneastafrica.org/');
 requireIncludes('YADEN social link', 'https://www.facebook.com/YADEN-East-Africa-116520675054374/timeline/');
-requireIncludes('Spills link', 'https://spillsofeden.com/');
+requireNotIncludes('Spills old domain removed (now an unrelated gambling site)', 'href="https://spillsofeden.com');
 requireIncludes('Spills social link', 'https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ');
 requireIncludes('My Guardian link', 'https://services.myguardian.mobi/');
 requireIncludes('Carledorian link', 'https://carledorian.com/');

@@ -304,7 +304,7 @@ Suggested link label:
 Visit Spills of Eden
 
 Public links:
-- Website: https://spillsofeden.com/
+- Website: none. Do not link spillsofeden.com: as of 19 November 2026 that domain shows an unrelated gambling site.
 - YouTube: https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ
 
 Content note from local files:
@@ -534,7 +534,7 @@ Use the official website as primary. Include Facebook only after confirming this
 ### Spills of Eden
 
 Links:
-- Website: https://spillsofeden.com/
+- Website: none. Do not link spillsofeden.com: as of 19 November 2026 that domain shows an unrelated gambling site.
 - YouTube: https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ
 
 Suggested website treatment:

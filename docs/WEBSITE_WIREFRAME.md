@@ -246,7 +246,7 @@ Expanded copy:
 Through herbal products, natural wellness experiences, restorative spaces and women-linked value chains, it connects enterprise development with preventive health, healing, nutrition culture and community wellbeing. Its model is especially relevant for programmes that want to combine local enterprise, indigenous knowledge, women's economic participation and holistic health promotion.
 
 Links:
-- Website: https://spillsofeden.com/
+- Website: none. Do not link spillsofeden.com: as of 19 November 2026 that domain shows an unrelated gambling site.
 - YouTube: https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ
 
 Publishing note:
@@ -555,7 +555,7 @@ Partner links:
 - COTRR Africa website: https://cotrr-africa.org/
 - YADEN East Africa website: https://www.yadeneastafrica.org/
 - YADEN East Africa Facebook candidate: https://www.facebook.com/YADEN-East-Africa-116520675054374/timeline/
-- Spills of Eden website: https://spillsofeden.com/
+- Spills of Eden website: none. Do not link spillsofeden.com (now an unrelated gambling site).
 - Spills of Eden YouTube: https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ
 - My Guardian website: https://services.myguardian.mobi/
 - Carledorian website: https://carledorian.com/
