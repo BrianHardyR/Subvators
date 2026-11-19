@@ -16,7 +16,7 @@ const count = (source, pattern) => (source.match(pattern) || []).length;
 expect(index.includes("family=Besley") && index.includes("family=Figtree"), "index.html must load Besley and Figtree.");
 expect(count(index, /<section class="(?:hero|section)\b/g) === 9 && index.includes('<footer class="section'), "The page must keep its ten sections (nine in main plus the contact footer).");
 expect(count(index, /class="partner(?: is-open)?"/g) >= 5, "Partner ecosystem must list at least five partners.");
-expect(count(index, /class="tile"/g) === 8, "Evidence stories must show eight photos.");
+expect(count(index, /class="tile"/g) === 11, "Evidence stories must show eleven photos.");
 expect(count(index, /class="hero-photo"/g) === 3, "Hero must start with exactly three photos.");
 expect(index.includes("data-hero-pause"), "Hero collage must have a pause control.");
 expect(count(index, /class="row row-numbered"/g) === 5, "Only the five-step model is numbered.");

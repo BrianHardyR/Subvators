@@ -386,8 +386,8 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
 .mosaic {
   display: grid;
   grid-template-columns: 1.15fr 0.8fr 0.7fr 0.85fr;
-  grid-template-rows: repeat(4, clamp(96px, 14vw, 220px));
-  grid-template-areas: "a b c g" "a b d h" "e e f f" "e e f f";
+  grid-template-rows: repeat(6, clamp(96px, 14vw, 220px));
+  grid-template-areas: "a b c g" "a b d h" "e e f f" "e e f f" "i i j k" "i i j k";
   gap: 6px;
 }
 
@@ -400,6 +400,9 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
 .tile:nth-child(6) { grid-area: f; }
 .tile:nth-child(7) { grid-area: g; }
 .tile:nth-child(8) { grid-area: h; }
+.tile:nth-child(9) { grid-area: i; }
+.tile:nth-child(10) { grid-area: j; }
+.tile:nth-child(11) { grid-area: k; }
 .tile img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--slow) var(--ease); }
 .tile:hover img, .tile:focus-visible img { transform: scale(1.05); }
 .mosaic:hover .tile:not(:hover) { opacity: 0.5; }
@@ -501,8 +504,8 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
 
   .mosaic {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: repeat(6, clamp(84px, 24vw, 190px));
-    grid-template-areas: "a a b" "a a b" "c d d" "e e f" "e e f" "g h h";
+    grid-template-rows: repeat(10, clamp(84px, 24vw, 190px));
+    grid-template-areas: "a a b" "a a b" "c d d" "e e f" "e e f" "g h h" "i i i" "i i i" "j j k" "j j k";
   }
   .viewer { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-3); }
 }

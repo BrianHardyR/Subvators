@@ -168,7 +168,7 @@ Five rules decide every choice:
    operating model.
 4. **Photos are evidence.** Straight, never tilted, never with text laid over
    faces. They form a collage in two places: at most three overlapping photos
-   in the hero, and the eight-photo mosaic in Evidence stories.
+   in the hero, and the eleven-photo mosaic in Evidence stories.
 5. **Earth, Health, Wealth is a system.** Each pillar has a colour and a tag.
    Partners are tagged with the pillars they serve. These tags are the only
    pills on the site and the only place gold is a fill.
@@ -261,7 +261,7 @@ corners.
 - **Evidence plate:** photo with its caption underneath.
 - **Hero collage:** at most three overlapping photos with a paper edge. The
   partner label and Pause button sit under it.
-- **Evidence stories mosaic:** eight photos in uneven sizes. A photo's caption
+- **Evidence stories mosaic:** eleven photos in uneven sizes. A photo's caption
   rises on a solid strip under the pointer (always shown on touch screens), and
   selecting a photo opens it large in place with arrows to the rest.
 - **Quote:** serif, burgundy rule on the left. One style.

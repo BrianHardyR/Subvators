@@ -54,7 +54,7 @@
     toArray(ledger.children).forEach(function (child, i) { child.style.setProperty("--i", i); });
   });
   toArray(document.querySelectorAll(".tile")).forEach(function (tile, i) {
-    tile.style.setProperty("--o", (i * 3) % 8);
+    tile.style.setProperty("--o", i % 8);
   });
 
   // ---- Count: the two real figures count up once ----
