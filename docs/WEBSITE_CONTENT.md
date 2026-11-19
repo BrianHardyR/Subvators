@@ -121,7 +121,7 @@ Secondary CTA:
 Partner with us
 
 Proof points:
-- 5 locally led organisations supported
+- 7 locally led organisations supported
 - 40+ CBO initiatives reached
 - Established in 2024
 - Health, wealth and Earth focus
@@ -149,7 +149,7 @@ A bridge between grassroots realities and systems change.
 Body:
 Subvators Hub supports locally led organisations that are already close to the challenge. Through strategic partnership development, institutional strengthening, action-policy research, fundraising readiness and AI-enabled evidence systems, the Hub helps local actors become stronger vehicles for prevention, resilience, care, advocacy and reform.
 
-To date, Subvators Hub has supported five locally led organisations that together reach more than 40 CBO initiatives and growing. These initiatives span action research, performance arts, agribusiness, indigenous food fortification, youth leadership, wellness enterprise, migrant safety and community entrepreneurship.
+To date, Subvators Hub has supported seven locally led organisations that together reach more than 40 CBO initiatives and growing. These initiatives span action research, performance arts, agribusiness, indigenous food fortification, youth leadership, wellness enterprise, migrant safety and community entrepreneurship.
 
 ## Why It Matters
 

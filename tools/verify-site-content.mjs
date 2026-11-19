@@ -91,9 +91,9 @@ requireIncludes('hero lead', 'We strengthen community-rooted organisations so lo
 requireNotIncludes('old hero lead removed', 'Subvators Hub turns field evidence, local innovators and partner coalitions into fundable health, wealth and Earth systems.');
 requireContentIncludes('organisation positioning source', 'Subvators Hub is a Kenya-based catalytic organisation that strengthens community-rooted organisations');
 requireIncludes('overview source body', 'Subvators Hub supports locally led organisations that are already close to the challenge.');
-requireIncludes('overview to-date body', 'To date, Subvators Hub has supported five locally led organisations that together reach more than 40 CBO initiatives and growing.');
+requireIncludes('overview to-date body', 'To date, Subvators Hub has supported seven locally led organisations that together reach more than 40 CBO initiatives and growing.');
 requireIncludes('core idea', 'visible, credible and fundable');
-requireIncludes('proof point orgs', '5 locally led organisations supported');
+requireIncludes('proof point orgs', '7 locally led organisations supported');
 requireIncludes('proof point cbos', '40+ CBO initiatives reached');
 requireIncludes('operating model observe', 'Field evidence and community realities');
 requireIncludes('operating model strengthen', 'Institutional development');
