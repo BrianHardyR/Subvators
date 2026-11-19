@@ -123,6 +123,9 @@ requireIncludes('Spills link', 'https://spillsofeden.com/');
 requireIncludes('Spills social link', 'https://www.youtube.com/channel/UC_jd09s57j7VHiOm8cXpUSQ');
 requireIncludes('My Guardian link', 'https://services.myguardian.mobi/');
 requireIncludes('Carledorian link', 'https://carledorian.com/');
+requireIncludes('Swarm Initiative description', 'turns organic waste into wealth while building dignified green livelihoods');
+requireIncludes('Swarm Initiative link', 'https://theswarminitiative.com/');
+requireIncludes('INTARCH description', 'INTARCH brings architecture, spatial development and education together');
 requireIncludes('evidence systems public copy', 'Community dialogue, restorative wellness and food enterprise evidence show how partner work becomes stronger, clearer and more fundable.');
 requireIncludes('founder confirmed name', 'Lucy Den Teuling founded Subvators Hub');
 requireIncludes('founder role', 'Founder and Lead Visionary, Subvators Hub');
@@ -189,7 +192,8 @@ else failures.push('hero collage script: missing partner photo sequence');
 for (const caption of ['Royal Spotlight: Yaden&rsquo;s Story', 'Bokoboko Wellness Haven', 'Bokoboko Eco-Healing Resort', 'Nature&rsquo;s Wealth: Herbal Healing', 'Youth Voices Through Performance', "Earth enterprise, wellness - Kenya's 1st Lady", 'Carledorian Coffee: Brewing with a Purpose']) {
   requireIncludes('evidence story caption ' + caption, caption);
 }
-for (const src of [...js.matchAll(/(?:YADEN|SPILLS|CARLEDORIAN) \+ "([^"]+)"/g)]) {
+for (const src of [...js.matchAll(/(?:YADEN|SPILLS|CARLEDORIAN|INTARCH) \+ "([^"]+)"/g)]) {
+  if (src[0].startsWith('INTARCH')) { requireFile('hero image exists ' + src[1], 'images/events/Intarch/' + src[1]); continue; }
   const prefix = src[0].startsWith('YADEN') ? 'Yaden East Africa/WhatsApp Image 2026-06-30 at ' : src[0].startsWith('SPILLS') ? 'Spills of Eden/WhatsApp Image 2026-06-30 at ' : 'Carledorian/WhatsApp Image 2026-06-29 at ';
   requireFile('hero image exists ' + src[1], 'images/events/' + prefix + src[1]);
 }

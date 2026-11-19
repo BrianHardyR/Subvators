@@ -599,3 +599,22 @@ Image rules:
 5. Confirm Spills of Eden CEO/founder name and approved profile image.
 6. Confirm whether Atlas Network USA support should be named on the public website.
 7. Confirm whether partner impact numbers should stay at profile level only or include partner-specific numbers.
+
+
+## Partners added November 2026
+
+### The Swarm Initiative (listed second, before YADEN East Africa)
+
+Source: TSI company profile (PDF) supplied 18 November 2026.
+Meta line: Circular economy / waste to wealth / green livelihoods
+Pillars: Earth, Wealth
+Link: https://theswarminitiative.com/
+Photos: pending from the partner. Not yet in the hero collage.
+
+### INTARCH (listed last)
+
+Source: INTARCH profile (Word document) dated 19 November 2026.
+Meta line: Architecture / participatory design / lifelong learning
+Pillars: Earth (to confirm)
+Link: none supplied.
+Photos: three workshop photos in images/events/Intarch/.

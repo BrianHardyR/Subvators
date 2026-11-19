@@ -97,6 +97,7 @@
   var YADEN = EVENTS + "Yaden East Africa/WhatsApp Image 2026-06-30 at ";
   var SPILLS = EVENTS + "Spills of Eden/WhatsApp Image 2026-06-30 at ";
   var CARLEDORIAN = EVENTS + "Carledorian/WhatsApp Image 2026-06-29 at ";
+  var INTARCH = EVENTS + "Intarch/";
 
   // To add a partner to the hero, add one entry here: name, label, then three photos (src, alt).
   var heroPartnerImages = [
@@ -124,6 +125,11 @@
       [CARLEDORIAN + "13.02.37.jpeg", "Carledorian food enterprise display"],
       [CARLEDORIAN + "12.59.28.jpeg", "Carledorian local product and value-chain activity"],
       [CARLEDORIAN + "12.59.27 (2).jpeg", "Carledorian product evidence from partner activity"]
+    ] },
+    { name: "INTARCH", label: "Participatory design", photos: [
+      [INTARCH + "workshop-drawing.jpg", "Young people drawing on large sheets of paper on the floor during an INTARCH design workshop"],
+      [INTARCH + "workshop-model.jpg", "A group looking at a handmade site model during an INTARCH participatory design session"],
+      [INTARCH + "workshop-group.jpg", "Workshop participants arranging sheets of paper on the floor during an INTARCH group exercise"]
     ] }
   ];
 
