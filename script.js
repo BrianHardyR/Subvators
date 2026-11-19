@@ -252,6 +252,7 @@
       viewerCount.textContent = (current + 1) + " of " + tiles.length;
       if (viewer.hidden) {
         viewer.hidden = false;
+        viewer.querySelector("[data-viewer-inner]").scrollIntoView({ block: "nearest" });
         viewer.querySelector('[data-viewer-step="1"]').focus({ preventScroll: true });
       }
     }

@@ -426,16 +426,26 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
 .tile:hover .tile-caption, .tile:focus-visible .tile-caption { transform: none; }
 @media (hover: none) { .tile-caption { transform: none; } }
 
+/* The viewer covers the whole mosaic; its content sticks under the header and is never taller than the screen. */
 .viewer {
   position: absolute;
   inset: 0;
   z-index: 5;
+  background: var(--forest);
+  animation: viewer-in var(--fast) ease-out both;
+}
+
+.viewer-inner {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-3));
   display: grid;
   grid-template-columns: 7fr 5fr;
   gap: clamp(20px, 4vw, 56px);
   align-items: center;
-  background: var(--forest);
-  animation: viewer-in var(--fast) ease-out both;
+  height: 100%;
+  max-height: calc(100vh - var(--header-height) - var(--space-3) * 2);
+  max-height: calc(100dvh - var(--header-height) - var(--space-3) * 2);
+  scroll-margin-top: calc(var(--header-height) + var(--space-3));
 }
 
 .viewer-photo { height: 100%; min-height: 0; overflow: hidden; border-radius: var(--radius); }
@@ -507,7 +517,7 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
     grid-template-rows: repeat(10, clamp(84px, 24vw, 190px));
     grid-template-areas: "a a b" "a a b" "c d d" "e e f" "e e f" "g h h" "i i i" "i i i" "j j k" "j j k";
   }
-  .viewer { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-3); }
+  .viewer-inner { grid-template-columns: 1fr; grid-template-rows: minmax(0, 1fr) auto; gap: var(--space-3); }
 }
 
 @media (max-width: 559px) {
