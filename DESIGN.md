@@ -1,82 +1,73 @@
 ---
 version: alpha
 name: Subvators Hub
-description: Kenya-based grassroots innovation and partnership platform for health, wealth and Earth.
+description: Kenya-based grassroots innovation and partnership organisation for health, wealth and Earth.
 colors:
   primary: "#01331A"
-  primary-strong: "#012D12"
-  primary-muted: "#1B4E21"
+  primary-hover: "#1B4E21"
   secondary: "#701011"
-  secondary-strong: "#611412"
   tertiary: "#FDD37F"
-  neutral: "#F3F1ED"
+  ground: "#DEDBD2"
   surface: "#FBFAF5"
+  surface-shade: "#F3F1ED"
   on-surface: "#111611"
   on-primary: "#FFFFFF"
   on-secondary: "#FFFFFF"
   on-tertiary: "#2D1502"
   muted: "#5C665F"
-  border: "#E5E4DE"
+  border: "#D8D6CC"
 typography:
   headline-display:
-    fontFamily: "Montserrat, Arial, sans-serif"
-    fontSize: 64px
-    fontWeight: 800
-    lineHeight: 1
+    fontFamily: "Besley, Georgia, serif"
+    fontSize: 72px
+    fontWeight: 500
+    lineHeight: 1.02
     letterSpacing: 0em
   headline-lg:
-    fontFamily: "Montserrat, Arial, sans-serif"
+    fontFamily: "Besley, Georgia, serif"
     fontSize: 44px
-    fontWeight: 800
+    fontWeight: 500
     lineHeight: 1.08
     letterSpacing: 0em
-  headline-md:
-    fontFamily: "Montserrat, Arial, sans-serif"
-    fontSize: 30px
-    fontWeight: 800
-    lineHeight: 1.14
+  stat:
+    fontFamily: "Besley, Georgia, serif"
+    fontSize: 40px
+    fontWeight: 500
+    lineHeight: 1
+    letterSpacing: 0em
+  title:
+    fontFamily: "Figtree, Arial, sans-serif"
+    fontSize: 22px
+    fontWeight: 600
+    lineHeight: 1.2
     letterSpacing: 0em
   body-lg:
-    fontFamily: "Montserrat, Arial, sans-serif"
-    fontSize: 18px
+    fontFamily: "Figtree, Arial, sans-serif"
+    fontSize: 20px
     fontWeight: 400
-    lineHeight: 1.6
+    lineHeight: 1.5
     letterSpacing: 0em
   body-md:
-    fontFamily: "Montserrat, Arial, sans-serif"
+    fontFamily: "Figtree, Arial, sans-serif"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: 0em
   body-sm:
-    fontFamily: "Montserrat, Arial, sans-serif"
+    fontFamily: "Figtree, Arial, sans-serif"
     fontSize: 14px
     fontWeight: 400
     lineHeight: 1.45
     letterSpacing: 0em
-  label-lg:
-    fontFamily: "Montserrat, Arial, sans-serif"
-    fontSize: 14px
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: 0em
   label-md:
-    fontFamily: "Montserrat, Arial, sans-serif"
+    fontFamily: "Figtree, Arial, sans-serif"
     fontSize: 12px
-    fontWeight: 700
+    fontWeight: 600
     lineHeight: 1.2
-    letterSpacing: 0em
-  stat:
-    fontFamily: "Montserrat, Arial, sans-serif"
-    fontSize: 40px
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: 0em
+    letterSpacing: 0.08em
 rounded:
   none: 0px
-  sm: 4px
   md: 8px
-  lg: 16px
   full: 9999px
 spacing:
   xs: 4px
@@ -85,50 +76,63 @@ spacing:
   lg: 24px
   xl: 40px
   xxl: 64px
+  xxxl: 96px
 components:
   page:
-    backgroundColor: "{colors.neutral}"
+    backgroundColor: "{colors.ground}"
     textColor: "{colors.on-surface}"
     typography: "{typography.body-md}"
-  hero-band:
-    backgroundColor: "{colors.primary-strong}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.headline-display}"
-  card:
+  sheet:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.on-surface}"
-    rounded: "{rounded.md}"
-    padding: "{spacing.lg}"
+    typography: "{typography.body-md}"
+  section-alt:
+    backgroundColor: "{colors.surface-shade}"
+    textColor: "{colors.on-surface}"
+  section-evidence:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.headline-lg}"
+  section-advisory:
+    backgroundColor: "{colors.secondary}"
+    textColor: "{colors.on-secondary}"
+    typography: "{typography.headline-lg}"
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
-    typography: "{typography.label-lg}"
+    typography: "{typography.body-sm}"
     rounded: "{rounded.md}"
-    padding: 14px
+    padding: 12px
   button-primary-hover:
-    backgroundColor: "{colors.primary-muted}"
+    backgroundColor: "{colors.primary-hover}"
     textColor: "{colors.on-primary}"
-    typography: "{typography.label-lg}"
+    typography: "{typography.body-sm}"
     rounded: "{rounded.md}"
-    padding: 14px
-  button-secondary:
+    padding: 12px
+  button-paper:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.primary}"
+    typography: "{typography.body-sm}"
+    rounded: "{rounded.md}"
+    padding: 12px
+  pillar-earth:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.on-primary}"
+    typography: "{typography.label-md}"
+    rounded: "{rounded.full}"
+    padding: 4px
+  pillar-health:
     backgroundColor: "{colors.secondary}"
     textColor: "{colors.on-secondary}"
-    typography: "{typography.label-lg}"
-    rounded: "{rounded.md}"
-    padding: 14px
-  button-secondary-hover:
-    backgroundColor: "{colors.secondary-strong}"
-    textColor: "{colors.on-secondary}"
-    typography: "{typography.label-lg}"
-    rounded: "{rounded.md}"
-    padding: 14px
-  chip-earth:
+    typography: "{typography.label-md}"
+    rounded: "{rounded.full}"
+    padding: 4px
+  pillar-wealth:
     backgroundColor: "{colors.tertiary}"
     textColor: "{colors.on-tertiary}"
     typography: "{typography.label-md}"
     rounded: "{rounded.full}"
-    padding: 8px
+    padding: 4px
   caption:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.muted}"
@@ -140,109 +144,155 @@ components:
 
 # Subvators Hub Design System
 
+This file is the single source of truth for the site's design. `styles.css`
+implements it through the tokens in its `:root` block and uses no colour, size
+or weight outside those tokens. `npm run verify` fails if that drifts.
+
 ## Overview
 
-Subvators Hub should feel like a credible grassroots innovation platform:
+Subvators Hub should feel like a credible grassroots innovation organisation:
 institutional enough for donors and partners, grounded enough for community
-organisations, and warm enough for health, livelihood and Earth-centered work.
+organisations, and warm enough for health, livelihood and Earth-centred work.
 
-This first design discovery pass is derived from the existing profile document
-and image assets in this workspace. The primary logo source is
-`images/logo.PNG`. The supporting evidence is
-the set of branded PNG campaign graphics in `images/`; WhatsApp field photos are
-content evidence, not core identity references.
+Five rules decide every choice:
 
-The logo lockup uses a circular green and burgundy monogram, the name
-"Subvators Hub", the line "Sustainable Business Innovators", and the tagline
-"Earth, Health, Wealth." Treat the logo as artwork. Do not rebuild the wordmark
-with live type unless a source vector or official brand guide is supplied.
+1. **Serif speaks, sans works.** The serif is for statements: page headline,
+   section headings, quotes and big numbers. The sans is for everything a
+   visitor reads or operates.
+2. **Three surfaces, each with a meaning.** Paper is the default. Forest green
+   marks proof: the two Evidence sections and the closing contact band.
+   Burgundy marks the ask and is used once, for Strategic advisory. No
+   gradients, glows or grid paper.
+3. **One list.** Steps, capabilities, partners and advisory areas all use the
+   ruled ledger row. Numbers appear only where order matters: the five-step
+   operating model.
+4. **Photos are evidence.** Straight, never tilted, never with text laid over
+   faces. They form a collage in two places: at most three overlapping photos
+   in the hero, and the eight-photo mosaic in Evidence stories.
+5. **Earth, Health, Wealth is a system.** Each pillar has a colour and a tag.
+   Partners are tagged with the pillars they serve. These tags are the only
+   pills on the site and the only place gold is a fill.
+
+The logo lockup is artwork. Do not rebuild the wordmark or the script tagline
+with live type.
 
 ## Colors
 
-The palette is built from repeated colors in the logo and branded graphics.
-Green is the dominant institutional and Earth signal. Burgundy carries health,
-protection and urgency. Warm cream gives the brand a field-based, human texture.
-A small gold accent can be used for emphasis, highlights and Earth-linked chips.
+Nine colours, each with one job.
 
-- **Primary (#01331A):** Deep forest green for headers, bands, major navigation
-  and the main institutional tone.
-- **Primary strong (#012D12):** Near-black green for deep sections and footer
-  surfaces.
-- **Primary muted (#1B4E21):** Mid forest green for hover states, icons and
-  secondary data marks.
-- **Secondary (#701011):** Burgundy from the logo and partner graphics; use for
-  health, protection, warning and high-emphasis secondary actions.
-- **Tertiary (#FDD37F):** Warm earth-gold accent for small highlights only.
-- **Neutral (#F3F1ED) and surface (#FBFAF5):** Warm off-white backgrounds that
-  match the campaign graphics better than pure gray.
+- **Ground (#DEDBD2):** the margin around the page sheet on large screens.
+  Nothing else.
+- **Surface / Paper (#FBFAF5):** the page sheet and default sections.
+- **Surface shade (#F3F1ED):** alternate section, to separate two paper
+  sections.
+- **On-surface / Ink (#111611):** headings and body text.
+- **Muted (#5C665F):** secondary text and captions.
+- **Primary / Forest (#01331A):** primary button, Evidence sections, contact
+  band, Earth tag.
+- **Primary hover (#1B4E21):** hover state of forest only.
+- **Secondary / Burgundy (#701011):** labels, the open or active item, the
+  Strategic advisory band, Health tag. Never a button on paper.
+- **Tertiary / Gold (#FDD37F):** labels on dark bands, focus ring, Wealth tag.
+  Never text on paper.
+
+Hairlines are Border (#D8D6CC) on paper and white at 22% on dark bands. The
+rule that opens a ledger is Ink.
 
 ## Typography
 
-The campaign graphics use a confident geometric sans-serif style for headlines,
-body text and labels. Montserrat is the current implementation candidate because
-it matches the high-weight headings, compact labels and civic-institutional tone.
-If source brand files reveal the exact typefaces later, update the tokens.
+Two families, eight styles, three weights (400, 500 for the serif, 600).
 
-Use bold sans-serif headlines for short statements such as "Evidence.
-Innovation. Accountability." Keep body text readable and plain. The script-style
-tagline in the logo should remain part of the logo artwork, not a general UI font.
+Besley is a sturdy bracketed serif in the same family as the "Subvators Hub"
+wordmark in the logo. Figtree is a clean geometric sans close to the logo's
+second line. Both are loaded from Google Fonts in `index.html`.
+
+| Style | Family | Size / line | Use |
+| --- | --- | --- | --- |
+| Display | Besley 500 | 72 / 1.02, fluid down to 40 | Hero headline only |
+| Heading | Besley 500 | 44 / 1.08, fluid down to 30 | Section headings |
+| Stat | Besley 500 | 40 / 1 | Hero figures |
+| Title | Figtree 600 | 22 / 1.2 | Row and partner names; quotes use this size in Besley |
+| Lead | Figtree 400 | 20 / 1.5 | Section intros |
+| Body | Figtree 400 | 16 / 1.6 | Paragraphs |
+| Small | Figtree 400 | 14 / 1.45 | Captions, meta lines |
+| Label | Figtree 600 | 12 / 1.2, caps, tracking 0.08em | Section labels |
+
+Body copy is regular weight. 600 is reserved for titles, labels and buttons.
 
 ## Layout
 
-Layouts should be structured, editorial and scan-friendly. Use full-width bands
-for major sections, constrained content widths for reading, and clear separation
-between partner ecosystem, impact metrics and advisory content.
+Spacing has seven steps: 4, 8, 16, 24, 40, 64, 96.
 
-The website direction borrows from the `inspirations/` references: compact
-navigation, oversized first-view headlines, split hero composition, a strong
-side rail or color panel, asymmetrical media blocks and numbered list modules.
-Translate those patterns into Subvators' green and burgundy identity; do not
-copy the Japanese-specific motifs from the references.
+Every section splits 5 and 7: label, heading and lead on the left, content on
+the right. On large screens the left side sticks under the header while the
+longer right side scrolls, and releases at the end of its section. Two planned
+exceptions: the Evidence stories mosaic runs the full width of the page, and
+the founder portrait takes the left side with the text on the right.
 
-Spacing follows an 8px rhythm with a 4px micro step. Dense operational areas can
-use `md` and `lg` spacing; story-led sections can use `xl` and `xxl`.
+The hero is a 7 and 5 split in two rows: copy beside the collage, then the
+figures beside the partner label and Pause button, on the same level.
+
+On screens 1000px and wider the page is a paper sheet with an 18px margin of
+Ground around it and a hairline edge. No shadow.
+
+Two breakpoints. Below 860px sections stack into one column, the navigation
+collapses into a menu, only the header sticks, and the hero order becomes copy,
+figures, collage, label. Below 560px ledger rows stack and the figures go two
+across.
 
 ## Elevation & Depth
 
-Prefer tonal depth over heavy shadows. Use white or warm-surface panels on
-neutral backgrounds, dark green bands for authority, and thin dividers for dense
-information. Shadows should be restrained and reserved for overlays, menus and
-high-priority cards.
+Hairlines and surface colour separate things. One shadow exists, for the
+mobile menu. The sticky header has a hairline, not a shadow.
 
 ## Shapes
 
-The brand graphics are mostly crisp rectangles, circular logos and rounded icon
-containers. Use 8px radius for cards, buttons and panels. Use full radius only
-for chips, avatars, circular logo crops and icon badges.
+8px corners on buttons and photos. Fully round on pillar tags only. No mixed
+corners.
 
 ## Components
 
-Primary buttons should be green with white text. Secondary buttons can use
-burgundy with white text. Small chips may use the warm earth-gold accent with
-dark text. Cards should use warm surface backgrounds with dark text and minimal
-border treatment.
+- **Section head:** label, heading, optional lead. Identical in every section.
+- **Ledger row:** title and description on a hairline. Numbered only for the
+  five-step model. The partner version expands, one row open at a time, and
+  carries the partner's meta line and pillar tags.
+- **Buttons:** primary (forest), outline, and paper for dark bands.
+- **Stat strip:** open, ruled above, no boxes.
+- **Evidence plate:** photo with its caption underneath.
+- **Hero collage:** at most three overlapping photos with a paper edge. The
+  partner label and Pause button sit under it.
+- **Evidence stories mosaic:** eight photos in uneven sizes. A photo's caption
+  rises on a solid strip under the pointer (always shown on touch screens), and
+  selecting a photo opens it large in place with arrows to the rest.
+- **Quote:** serif, burgundy rule on the left. One style.
 
-Use numbered partner rows instead of generic card grids for the strategic
-ecosystem. Use stat strips for credibility signals. Use large media panels for
-evidence, partner graphics and field presence. Keep controls compact and
-purposeful: pill chips for focus areas, simple icon buttons for row expansion,
-and full-width buttons on mobile.
+## Motion
 
-Logo usage should prioritize the complete logo lockup on first-view surfaces,
-partner decks and official communications. A cropped monogram can be derived
-later for favicons and compact navigation, but it should come from a source asset
-rather than a hand-redrawn approximation.
+Seven named moves, three durations (150, 400, 800ms) plus one slower 1200ms
+for the hero, and one easing curve: `cubic-bezier(0.2, 0.7, 0.1, 1)`.
+
+| Move | What it does | Timing |
+| --- | --- | --- |
+| Rise | The hero headline comes up word by word, once on load. | 800ms, 40ms apart |
+| Draw | The rule above a ledger draws left to right, then rows follow. A burgundy rule draws under the partner being hovered or opened. | 800ms / 400ms |
+| Wipe | Photos are uncovered left to right as they enter, and a story as it opens. | 800ms |
+| Settle | A photo eases from 108% to rest as it is uncovered, and to 105% under the pointer. | 800ms |
+| Follow | A partner's name steps 8px toward its detail under the pointer. A story caption rises under the pointer and the other photos step back. | 400ms |
+| Pass | Hero photos arrive small at the front, grow into the main place, step back, then leave. Never more than three on screen. | 1200ms, every 4s |
+| Count | The two real figures count up once. | 800ms |
+
+Only the hero collage loops. It has a Pause button and stops when scrolled out
+of view or when the tab is hidden. With reduced motion switched on nothing
+animates and the collage holds still.
 
 ## Do's and Don'ts
 
-- Do use green as the primary brand anchor across navigation, headers and key
-  institutional sections.
-- Do use burgundy intentionally for health, protection, urgency and secondary
-  calls to action.
-- Do keep the palette warm and grounded; use cream surfaces instead of cold gray
-  foundations.
-- Do keep the logo as artwork until official vector files are available.
-- Don't overuse the gold accent; it should support emphasis, not replace green or
-  burgundy.
-- Don't use field photos as decorative texture without a clear content purpose.
-- Don't rebuild the script tagline as regular UI type.
+- Do take every colour, size, weight, radius and duration from the tokens.
+- Do keep the copy as written; design changes do not change wording.
+- Do keep the logo as artwork.
+- Don't add a section layout that is not the 5 and 7 split or one of the two
+  planned exceptions.
+- Don't use gold as text on paper, or burgundy as a button on paper.
+- Don't tilt photos, lay text over faces, or add looping animation beyond the
+  hero collage.
+- Don't use pills for anything except pillar tags.

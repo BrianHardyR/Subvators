@@ -1,216 +1,271 @@
-const header = document.querySelector("[data-header]");
-const menuButton = document.querySelector("[data-menu-button]");
-const nav = document.querySelector("[data-site-nav]");
-const revealEls = document.querySelectorAll(".reveal");
-const partnerModule = document.querySelector("[data-partner-module]");
-const atlasObject = document.querySelector("[data-atlas-object]");
-const sectionCounter = document.querySelector("[data-section-counter]");
-const railMode = document.querySelector("[data-rail-mode]");
-const sectionEls = document.querySelectorAll("[data-section]");
-const heroLedgerRows = document.querySelectorAll(".partner-ledger .ledger-row");
-const atlasLabel = document.querySelector("[data-atlas-label]");
-const heroWord = document.querySelector("[data-hero-word]");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+// Subvators Hub. Motion vocabulary and timings are defined in DESIGN.md and styles.css.
+(function () {
+  "use strict";
 
-function syncHeader() {
-  if (!header) return;
-  header.classList.toggle("is-scrolled", window.scrollY > 10);
-}
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var toArray = function (list) { return Array.prototype.slice.call(list); };
+  root.classList.add("js");
 
-function closeMenu() {
-  if (!nav || !header || !menuButton) return;
-  nav.classList.remove("is-open");
-  header.classList.remove("is-open");
-  document.body.classList.remove("menu-open");
-  menuButton.setAttribute("aria-expanded", "false");
-}
+  // ---- Header menu (tablet and phone) ----
+  var header = document.querySelector("[data-header]");
+  var menuButton = document.querySelector("[data-menu-button]");
+  var nav = document.querySelector("[data-site-nav]");
 
-syncHeader();
-window.addEventListener("scroll", syncHeader, { passive: true });
-
-if (menuButton && nav && header) {
-  menuButton.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("is-open");
-    header.classList.toggle("is-open", isOpen);
-    document.body.classList.toggle("menu-open", isOpen);
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  nav.addEventListener("click", (event) => {
-    if (event.target.matches("a")) closeMenu();
-  });
-}
-
-if ("IntersectionObserver" in window) {
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.18 }
-  );
-
-  revealEls.forEach((el) => revealObserver.observe(el));
-
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        if (sectionCounter) sectionCounter.textContent = entry.target.dataset.section;
-        if (railMode) railMode.textContent = entry.target.dataset.sectionName;
-      });
-    },
-    { rootMargin: "-35% 0px -45% 0px", threshold: 0 }
-  );
-
-  sectionEls.forEach((section) => sectionObserver.observe(section));
-} else {
-  revealEls.forEach((el) => el.classList.add("is-visible"));
-}
-
-const HERO_WORD_TYPE_MS = 76;
-const HERO_WORD_HOLD_MS = 2600;
-const heroWords = heroWord?.dataset.heroWords?.split(",").map((word) => word.trim()).filter(Boolean) || [];
-let heroWordIndex = 0;
-let heroWordTimer = null;
-
-function queueNextHeroWord() {
-  if (!heroWord || heroWords.length <= 1 || reduceMotion.matches) return;
-  heroWordTimer = window.setTimeout(advanceHeroWord, HERO_WORD_HOLD_MS);
-}
-
-function setHeroWord(word, animate = true) {
-  if (!heroWord) return;
-  if (heroWordTimer) window.clearTimeout(heroWordTimer);
-
-  if (reduceMotion.matches || !animate) {
-    heroWord.textContent = word;
-    heroWord.classList.remove("is-typing");
-    return;
+  function closeMenu() {
+    if (!nav || !menuButton) return;
+    nav.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded", "false");
   }
 
-  let nextLength = 0;
-  heroWord.textContent = "";
-  heroWord.classList.add("is-typing");
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", function () {
+      var isOpen = nav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+    });
+    nav.addEventListener("click", function (event) {
+      if (event.target.closest("a")) closeMenu();
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeMenu();
+    });
+    document.addEventListener("click", function (event) {
+      if (header && !header.contains(event.target)) closeMenu();
+    });
+  }
 
-  function typeNextCharacter() {
-    nextLength += 1;
-    heroWord.textContent = word.slice(0, nextLength);
+  // ---- Rise: split the headline into words ----
+  var riseEl = document.querySelector("[data-rise]");
+  if (riseEl && !reduceMotion) {
+    var fullText = riseEl.textContent.replace(/\s+/g, " ").trim();
+    var wordIndex = 0;
+    var parts = [];
+    toArray(riseEl.childNodes).forEach(function (node) {
+      var accent = node.nodeType === 1;
+      node.textContent.trim().split(/\s+/).filter(Boolean).forEach(function (word) {
+        parts.push('<span class="word"><span' + (accent ? ' class="is-accent"' : "") + ' style="--i:' + (wordIndex++) + '">' + word + "</span></span>");
+      });
+    });
+    riseEl.setAttribute("aria-label", fullText);
+    riseEl.innerHTML = parts.join(" ");
+  }
 
-    if (nextLength < word.length) {
-      heroWordTimer = window.setTimeout(typeNextCharacter, HERO_WORD_TYPE_MS);
-      return;
+  toArray(document.querySelectorAll(".ledger")).forEach(function (ledger) {
+    toArray(ledger.children).forEach(function (child, i) { child.style.setProperty("--i", i); });
+  });
+  toArray(document.querySelectorAll(".tile")).forEach(function (tile, i) {
+    tile.style.setProperty("--o", (i * 3) % 8);
+  });
+
+  // ---- Count: the two real figures count up once ----
+  function countUp(el) {
+    var target = Number(el.dataset.count);
+    var suffix = el.dataset.suffix || "";
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    var start = performance.now();
+    (function frame(now) {
+      var progress = Math.min(1, Math.max(0, (now - start) / 800));
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) requestAnimationFrame(frame);
+    })(start);
+  }
+
+  // ---- Reveal each section once as it arrives ----
+  var revealEls = toArray(document.querySelectorAll(".reveal"));
+  function reveal(section) {
+    section.classList.add("is-visible");
+    toArray(section.querySelectorAll("[data-count]")).forEach(countUp);
+  }
+
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    root.classList.add("js-motion");
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        reveal(entry.target);
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  } else {
+    revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  // ---- Pass: hero collage, at most three photos on screen ----
+  var EVENTS = "images/events/";
+  var YADEN = EVENTS + "Yaden East Africa/WhatsApp Image 2026-06-30 at ";
+  var SPILLS = EVENTS + "Spills of Eden/WhatsApp Image 2026-06-30 at ";
+  var CARLEDORIAN = EVENTS + "Carledorian/WhatsApp Image 2026-06-29 at ";
+
+  // To add a partner to the hero, add one entry here: name, label, then three photos (src, alt).
+  var heroPartnerImages = [
+    { name: "COTRR Africa", label: "Field mobilisation", photos: [
+      [SPILLS + "23.43.52.jpeg", "Community resilience field setting connected to health and environment work"],
+      [CARLEDORIAN + "12.59.26 (1).jpeg", "Food security and enterprise product evidence"],
+      [YADEN + "12.05.04 (1).jpeg", "Community mobilisation and dialogue evidence"]
+    ] },
+    { name: "YADEN East Africa", label: "Youth civic evidence", photos: [
+      [YADEN + "23.41.47.jpeg", "YADEN East Africa community dialogue session"],
+      [YADEN + "23.42.09 (2).jpeg", "YADEN East Africa strategic engagement activity"],
+      [YADEN + "12.05.04 (1).jpeg", "YADEN East Africa youth mobilisation workshop"]
+    ] },
+    { name: "Spills of Eden", label: "Wellness enterprise", photos: [
+      [SPILLS + "17.24.02.jpeg", "Spills of Eden nature-based wellness activity"],
+      [SPILLS + "23.43.52.jpeg", "Spills of Eden restorative space visit"],
+      [SPILLS + "23.43.23 (1).jpeg", "Spills of Eden wellness and local knowledge evidence"]
+    ] },
+    { name: "My Guardian", label: "Protection pathways", photos: [
+      [YADEN + "23.42.05 (1).jpeg", "Community protection dialogue evidence"],
+      [YADEN + "23.42.08 (2).jpeg", "Strategic protection and civic engagement evidence"],
+      [SPILLS + "17.24.00.jpeg", "Community wellbeing environment evidence"]
+    ] },
+    { name: "Carledorian", label: "Food enterprise", photos: [
+      [CARLEDORIAN + "13.02.37.jpeg", "Carledorian food enterprise display"],
+      [CARLEDORIAN + "12.59.28.jpeg", "Carledorian local product and value-chain activity"],
+      [CARLEDORIAN + "12.59.27 (2).jpeg", "Carledorian product evidence from partner activity"]
+    ] }
+  ];
+
+  var stage = document.querySelector("[data-hero-stage]");
+  var caption = document.querySelector("[data-hero-caption]");
+  var pauseButton = document.querySelector("[data-hero-pause]");
+
+  if (stage && caption) {
+    var sequence = [];
+    heroPartnerImages.forEach(function (partner) {
+      partner.photos.forEach(function (photo) {
+        sequence.push({ src: photo[0], alt: photo[1], name: partner.name, label: partner.label });
+      });
+    });
+
+    var HERO_STEP_MS = 4000;
+    var mainIndex = 3; // the photo in the main place; matches the markup in index.html
+    var paused = false;
+    var offscreen = false;
+    var timer = null;
+    var lastName = sequence[mainIndex].name;
+    var itemAt = function (i) { return sequence[((i % sequence.length) + sequence.length) % sequence.length]; };
+
+    function updateCaption() {
+      var item = itemAt(mainIndex);
+      caption.children[0].textContent = item.label;
+      caption.children[1].textContent = item.name;
+      if (item.name !== lastName) {
+        caption.classList.remove("is-swapping");
+        void caption.offsetWidth;
+        caption.classList.add("is-swapping");
+      }
+      lastName = item.name;
     }
 
-    heroWord.classList.remove("is-typing");
-    queueNextHeroWord();
+    function stepHero() {
+      toArray(stage.children).forEach(function (photo) {
+        var next = Number(photo.dataset.pos) + 1;
+        photo.dataset.pos = next;
+        if (next >= 4) window.setTimeout(function () { photo.remove(); }, 1300);
+      });
+      mainIndex += 1;
+      var item = itemAt(mainIndex + 1);
+      var el = document.createElement("div");
+      var img = new Image();
+      el.className = "hero-photo";
+      el.dataset.pos = 0;
+      img.src = item.src;
+      img.alt = item.alt;
+      el.appendChild(img);
+      stage.appendChild(el);
+      void el.offsetWidth;
+      el.dataset.pos = 1;
+      updateCaption();
+      // warm the cache for the photo after this one
+      new Image().src = itemAt(mainIndex + 2).src;
+    }
+
+    function syncHero() {
+      var shouldRun = !paused && !offscreen && !reduceMotion && !document.hidden;
+      if (shouldRun && !timer) timer = window.setInterval(stepHero, HERO_STEP_MS);
+      if (!shouldRun && timer) { window.clearInterval(timer); timer = null; }
+    }
+
+    if (pauseButton) {
+      if (reduceMotion) pauseButton.hidden = true;
+      pauseButton.addEventListener("click", function () {
+        paused = !paused;
+        pauseButton.setAttribute("aria-pressed", String(paused));
+        pauseButton.textContent = paused ? "Play" : "Pause";
+        syncHero();
+      });
+    }
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { offscreen = !entry.isIntersecting; syncHero(); });
+      }).observe(stage);
+    }
+    document.addEventListener("visibilitychange", syncHero);
+    syncHero();
   }
 
-  typeNextCharacter();
-}
-
-function advanceHeroWord() {
-  heroWordIndex = (heroWordIndex + 1) % heroWords.length;
-  setHeroWord(heroWords[heroWordIndex]);
-}
-
-if (heroWord && heroWords.length) {
-  setHeroWord(heroWords[0], false);
-  queueNextHeroWord();
-}
-
-const heroPartnerImages = {
-  primary: document.querySelector('[data-atlas-image="primary"]'),
-  secondary: document.querySelector('[data-atlas-image="secondary"]'),
-  proof: document.querySelector('[data-atlas-image="proof"]'),
-};
-
-function switchHeroPartnerImages(row) {
-  if (!atlasObject) return;
-
-  const updates = [
-    [heroPartnerImages.primary, row.dataset.imagePrimary, row.dataset.altPrimary],
-    [heroPartnerImages.secondary, row.dataset.imageSecondary, row.dataset.altSecondary],
-    [heroPartnerImages.proof, row.dataset.imageProof, row.dataset.altProof],
-  ].filter(([image, src]) => image && src);
-
-  if (!updates.length) return;
-
-  const applyImages = () => {
-    updates.forEach(([image, src, alt]) => {
-      image.classList.remove('is-entering');
-      image.src = src;
-      image.alt = alt || '';
-      void image.offsetWidth;
-      image.classList.add('is-entering');
+  // ---- Partners: one row open at a time ----
+  var partners = toArray(document.querySelectorAll("[data-partner-list] .partner"));
+  partners.forEach(function (partner) {
+    partner.querySelector(".partner-toggle").addEventListener("click", function () {
+      var willOpen = !partner.classList.contains("is-open");
+      partners.forEach(function (other) {
+        var open = other === partner && willOpen;
+        other.classList.toggle("is-open", open);
+        other.querySelector(".partner-toggle").setAttribute("aria-expanded", String(open));
+      });
     });
-    atlasObject.classList.remove('is-switching');
-  };
+  });
 
-  if (reduceMotion.matches) {
-    applyImages();
-    return;
+  // ---- Evidence stories: open a photo in place ----
+  var tiles = toArray(document.querySelectorAll("[data-story-mosaic] .tile"));
+  var viewer = document.querySelector("[data-story-viewer]");
+
+  if (viewer && tiles.length) {
+    var viewerImage = viewer.querySelector("[data-viewer-image]");
+    var viewerTitle = viewer.querySelector("[data-viewer-title]");
+    var viewerWho = viewer.querySelector("[data-viewer-who]");
+    var viewerCount = viewer.querySelector("[data-viewer-count]");
+    var current = 0;
+    var lastTile = null;
+
+    function openStory(i) {
+      current = (i + tiles.length) % tiles.length;
+      var tile = tiles[current];
+      var img = tile.querySelector("img");
+      viewerImage.classList.remove("is-entering");
+      viewerImage.src = img.getAttribute("src");
+      viewerImage.alt = img.alt;
+      void viewerImage.offsetWidth;
+      viewerImage.classList.add("is-entering");
+      viewerTitle.textContent = tile.querySelector(".tile-caption").textContent;
+      viewerWho.textContent = tile.dataset.who || "";
+      viewerCount.textContent = (current + 1) + " of " + tiles.length;
+      if (viewer.hidden) {
+        viewer.hidden = false;
+        viewer.querySelector('[data-viewer-step="1"]').focus({ preventScroll: true });
+      }
+    }
+
+    function closeStory() {
+      viewer.hidden = true;
+      if (lastTile) lastTile.focus({ preventScroll: true });
+    }
+
+    tiles.forEach(function (tile, i) {
+      tile.addEventListener("click", function () { lastTile = tile; openStory(i); });
+    });
+    toArray(viewer.querySelectorAll("[data-viewer-step]")).forEach(function (button) {
+      button.addEventListener("click", function () { openStory(current + Number(button.dataset.viewerStep)); });
+    });
+    viewer.querySelector("[data-viewer-close]").addEventListener("click", closeStory);
+    viewer.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") closeStory();
+      else if (event.key === "ArrowRight") openStory(current + 1);
+      else if (event.key === "ArrowLeft") openStory(current - 1);
+    });
   }
-
-  atlasObject.classList.add('is-switching');
-  window.setTimeout(applyImages, 170);
-}
-
-heroLedgerRows.forEach((row) => {
-  row.addEventListener("click", () => {
-    heroLedgerRows.forEach((item) => item.classList.toggle("is-active", item === row));
-    if (atlasLabel) atlasLabel.textContent = row.dataset.partnerLabel || row.dataset.partner || "Partner ecosystem";
-    switchHeroPartnerImages(row);
-  });
-});
-
-if (partnerModule) {
-  partnerModule.addEventListener("click", (event) => {
-    const row = event.target.closest(".ledger-entry");
-    if (!row) return;
-
-    const rows = [...partnerModule.querySelectorAll(".ledger-entry")];
-    rows.forEach((item) => {
-      const detail = item.nextElementSibling;
-      const isSelected = item === row;
-      item.classList.toggle("is-active", isSelected);
-      item.setAttribute("aria-expanded", String(isSelected));
-      if (detail) detail.hidden = !isSelected;
-    });
-  });
-}
-
-let parallaxFrame = null;
-
-window.addEventListener(
-  "scroll",
-  () => {
-    if (!atlasObject || reduceMotion.matches || parallaxFrame) return;
-
-    parallaxFrame = window.requestAnimationFrame(() => {
-      const offset = Math.min(36, window.scrollY * 0.03);
-      atlasObject.style.transform = "translate3d(0, " + offset + "px, 0)";
-      parallaxFrame = null;
-    });
-  },
-  { passive: true }
-);
-
-if (atlasObject && !reduceMotion.matches) {
-  atlasObject.addEventListener("pointermove", (event) => {
-    const rect = atlasObject.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 10;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * -10;
-    atlasObject.style.setProperty("--tilt-x", y + "deg");
-    atlasObject.style.setProperty("--tilt-y", x + "deg");
-    atlasObject.style.transform = "rotateX(" + y + "deg) rotateY(" + x + "deg)";
-  });
-
-  atlasObject.addEventListener("pointerleave", () => {
-    atlasObject.style.transform = "";
-  });
-}
+})();

@@ -1,4 +1,5 @@
-﻿import { existsSync, readFileSync } from "node:fs";
+﻿// Checks that the site keeps to the design system in DESIGN.md.
+import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,75 +9,44 @@ const css = readFileSync(join(root, "styles.css"), "utf8");
 const js = readFileSync(join(root, "script.js"), "utf8");
 
 const failures = [];
+const expect = (condition, message) => { if (!condition) failures.push(message); };
+const count = (source, pattern) => (source.match(pattern) || []).length;
 
-function expect(condition, message) {
-  if (!condition) failures.push(message);
-}
+// ---- structure ----
+expect(index.includes("family=Besley") && index.includes("family=Figtree"), "index.html must load Besley and Figtree.");
+expect(count(index, /<section class="(?:hero|section)\b/g) === 9 && index.includes('<footer class="section'), "The page must keep its ten sections (nine in main plus the contact footer).");
+expect(count(index, /class="partner(?: is-open)?"/g) >= 5, "Partner ecosystem must list at least five partners.");
+expect(count(index, /class="tile"/g) === 8, "Evidence stories must show eight photos.");
+expect(count(index, /class="hero-photo"/g) === 3, "Hero must start with exactly three photos.");
+expect(index.includes("data-hero-pause"), "Hero collage must have a pause control.");
+expect(count(index, /class="row row-numbered"/g) === 5, "Only the five-step model is numbered.");
+expect(!/rail|data-section-counter|data-hero-word/.test(index), "The side rail, section counter and typing headline were removed.");
 
-expect(
-  index.includes('data-design-direction="field-atlas"'),
-  "index.html must identify the Field Atlas design direction."
-);
-expect(
-  index.includes("Grassroots innovation made") && index.includes("data-hero-word"),
-  "Hero must use the concise animated content-positioning headline."
-);
-expect(
-  css.includes(".hero-title-word::after") && js.includes("const HERO_WORD_HOLD_MS = 2600;") && js.includes("heroWord.textContent = word.slice(0, nextLength);"),
-  "Hero must animate the final headline word."
-);
-expect(
-  !index.includes("Grassroots systems made fundable."),
-  "Hero must not use the old Field Atlas placeholder headline."
-);
-expect(
-  (index.match(/class="[^"]*\bledger-row\b/g) || []).length >= 5,
-  "Homepage must expose at least five partner ledger rows."
-);
-expect(
-  index.includes('data-section-counter'),
-  "Prototype must include a section counter hook for scroll motion."
-);
-expect(
-  index.includes('data-atlas-object'),
-  "Hero must include the floating atlas object hook."
-);
-expect(
-  css.includes(".atlas-hero") && css.includes(".field-rail") && css.includes(".atlas-object"),
-  "CSS must define the atlas hero, field rail and atlas object."
-);
-expect(
-  css.includes("@keyframes") && css.includes("prefers-reduced-motion"),
-  "CSS must define motion and reduced-motion handling."
-);
-expect(
-  css.includes("@media (max-width: 720px)") || css.includes("@media (max-width:720px)"),
-  "CSS must include a mobile breakpoint for the atlas layout."
-);
-expect(
-  js.includes("data-section-counter") && js.includes("data-atlas-object"),
-  "JavaScript must wire section counter and atlas object interactions."
-);
+// ---- token discipline in styles.css ----
+const rootEnd = css.indexOf("}", css.indexOf(":root"));
+const rules = css.slice(rootEnd);
+expect(!/#[0-9a-fA-F]{3,8}\b/.test(rules), "styles.css must not use a hex colour outside :root.");
+expect(!/rgba?\(/.test(rules), "styles.css must not use an rgb() colour outside :root.");
+expect(!/font-weight:\s*\d/.test(rules), "Font weights must come from the weight tokens.");
+expect(!/font-family:\s*(?!\s|var\()/.test(rules), "Font families must come from the family tokens.");
+expect(!/border-radius:\s*(?!\s|var\()/.test(rules), "Corner radii must come from the radius tokens.");
+expect(!/box-shadow:\s*(?!\s|var\()/.test(rules), "Shadows must come from the shadow token.");
+expect(count(rules, /box-shadow:/g) <= 1, "Only the mobile menu may have a shadow.");
+expect(!/gradient\(/.test(css), "No gradients.");
+expect(!/rotate\((?!90deg)/.test(css), "Photos are never tilted.");
+expect(!/infinite/.test(css), "No endlessly looping CSS animation.");
+const breakpoints = [...new Set([...css.matchAll(/@media \((?:max|min)-width: (\d+)px\)/g)].map((m) => m[1]))].sort();
+expect(breakpoints.join(",") === "1000,559,859", "Breakpoints are 859/559 (max) and 1000 (sheet frame); found " + breakpoints.join(","));
+expect(css.includes("prefers-reduced-motion"), "CSS must handle reduced motion.");
+expect(css.includes("position: sticky"), "Header and section heads must stick on large screens.");
 
-for (const match of index.matchAll(/\s(?:src|href)="([^"]+)"/g)) {
-  const asset = match[1];
-  if (
-    asset.startsWith("#") ||
-    asset.startsWith("mailto:") ||
-    asset.startsWith("http") ||
-    asset === "styles.css" ||
-    asset === "script.js"
-  ) {
-    continue;
-  }
-
-  expect(existsSync(join(root, asset)), `Missing referenced asset: ${asset}`);
-}
+// ---- behaviour hooks ----
+expect(js.includes("heroPartnerImages") && js.includes("HERO_STEP_MS"), "script.js must drive the hero collage.");
+expect(js.includes("prefers-reduced-motion"), "script.js must respect reduced motion.");
+expect(js.includes("data-story-viewer"), "script.js must open evidence stories in place.");
 
 if (failures.length) {
-  console.error("Prototype verification failed:");
-  for (const failure of failures) console.error(`- ${failure}`);
+  console.error("Design verification failed:\n- " + failures.join("\n- "));
   process.exit(1);
 }
-
-console.log("Prototype verification passed.");
+console.log("Design verification passed.");

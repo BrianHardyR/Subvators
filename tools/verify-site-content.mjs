@@ -64,7 +64,7 @@ function requireCssRuleIncludes(label, selector, needle) {
   else failures.push(label + ': missing "' + needle + '" in ' + selector + ' rule');
 }
 
-const heroMarkup = html.match(/<section class="atlas-hero"[\s\S]*?<\/section>/)?.[0] || '';
+const heroMarkup = (html.match(/<section class="hero[\s\S]*?<\/section>/)?.[0] || '').replace(/\s+/g, ' ').replace(/<\/?em>/g, '');
 
 function requireHeroIncludes(label, needle) {
   if (heroMarkup.includes(needle)) pass.push(label);
@@ -77,22 +77,13 @@ function requireHeroNotIncludes(label, needle) {
 }
 
 requireIncludes('first nav label about us', '<a href="#field">About Us</a>');
-requireIncludes('first section mode about us', 'data-section-name="ABOUT US"');
-requireIncludes('initial rail label about us', '<span class="rail-kicker" data-rail-mode>ABOUT US</span>');
 requireNotIncludes('old first nav field label removed', '<a href="#field">Field</a>');
 requireNotIncludes('old first section field mode removed', 'data-section-name="FIELD"');
 requireNotIncludes('old initial rail field label removed', '<span class="rail-kicker" data-rail-mode>FIELD</span>');
 requireIncludes('hero eyebrow', 'Kenya-based grassroots innovation organisation');
 requireHeroIncludes('hero concise headline fixed copy', 'Grassroots innovation made');
-requireHeroIncludes('hero animated word hook', 'data-hero-word');
-requireHeroIncludes('hero animated word options', 'data-hero-words="visible,credible,fundable"');
-requireHeroIncludes('hero accessible headline text', 'Grassroots innovation made visible, credible and fundable.');
+requireHeroIncludes('hero headline text', 'Grassroots innovation made visible, credible and fundable.');
 requireHeroNotIncludes('old long hero h1 removed', '<h1 id="hero-title">Subvators Hub makes grassroots innovation visible, credible and fundable.</h1>');
-requireSiteIncludes('hero word cursor pseudo element', '.hero-title-word::after');
-requireSiteIncludes('hero word cursor sits after text', 'display: inline-block;');
-requireSiteIncludes('hero word longer read hold', 'const HERO_WORD_HOLD_MS = 2600;');
-requireSiteIncludes('hero word measured typing text slices', 'heroWord.textContent = word.slice(0, nextLength);');
-requireSiteIncludes('hero word script', 'data-hero-word');
 requireSiteNotIncludes('hero word fixed ch cursor removed', '--hero-word-ch');
 requireSiteNotIncludes('hero word border cursor removed', 'border-right: 0.06em solid currentColor;')
 requireNotIncludes('old hero systems headline removed', 'Grassroots systems made fundable.');
@@ -104,7 +95,6 @@ requireIncludes('overview to-date body', 'To date, Subvators Hub has supported f
 requireIncludes('core idea', 'visible, credible and fundable');
 requireIncludes('proof point orgs', '5 locally led organisations supported');
 requireIncludes('proof point cbos', '40+ CBO initiatives reached');
-requireCssRuleIncludes('proof strip desktop avoids squeezed labels', '.proof-strip', 'grid-template-columns: repeat(2, minmax(0, 1fr));');
 requireIncludes('operating model observe', 'Field evidence and community realities');
 requireIncludes('operating model strengthen', 'Institutional development');
 requireIncludes('value strategic partnerships', 'Strategic partnership development');
@@ -166,7 +156,7 @@ requireSiteNotIncludes('old story card CSS removed', '.story-card')
 const brandMarkup = html.match(/<a class="brand"[\s\S]*?<\/a>/)?.[0] || '';
 if (brandMarkup.includes('src="images/logo.PNG"')) pass.push('navigation uses full logo');
 else failures.push('navigation logo: expected images/logo.PNG full logo');
-const founderMarkup = html.match(/<section class="section founder-section"[\s\S]*?<\/section>/)?.[0] || '';
+const founderMarkup = html.match(/<section class="section founder[\s\S]*?<\/section>/)?.[0] || '';
 if (founderMarkup.includes('src="images/people/founder/')) pass.push('founder section uses founder image');
 else failures.push('founder section image: expected image from images/people/founder/');
 if (!founderMarkup.includes('src="images/logo.PNG"')) pass.push('founder section no logo placeholder');
@@ -178,19 +168,7 @@ requireNotIncludes('evidence stories visible headline removed', 'Proof as field 
 requireNotIncludes('evidence stories visible body removed', 'approved event imagery, short labels and movement');
 requireNotIncludes('evidence stories left index rows removed', 'Youth dialogue and civic voice');
 requireIncludes('evidence stories accessible title', 'Evidence stories image mosaic');
-requireIncludes('evidence stories added YADEN image', 'story-photo story-yaden-board');
-requireIncludes('evidence stories added Spills image', 'story-photo story-spills-garden');
-requireIncludes('evidence stories added enterprise image', 'story-photo story-enterprise-detail');
 requireIncludes('evidence stories mosaic markup', 'data-story-mosaic');
-requireIncludes('evidence stories hero tile', 'story-photo story-hero');
-requireIncludes('evidence stories contact object', 'edge-object');
-requireSiteIncludes('global display font token', '--display-font: Georgia, "Times New Roman", serif;');
-requireSiteIncludes('global display size token', '--display-size: clamp(2.55rem, 4.5vw, 4.8rem);');
-requireSiteIncludes('global display line height token', '--display-line-height: 0.96;');
-requireSiteIncludes('headings use display font', 'font-family: var(--display-font);');
-requireSiteIncludes('story mosaic mask animation', '@keyframes storyMaskIn');
-requireSiteIncludes('story mosaic drift animation', '@keyframes storyImageDrift');
-requireSiteIncludes('story mosaic contact animation', '@keyframes storyContactDrift');
 requireIncludes('evidence content body', 'Subvators uses field evidence, partner activity and practical evidence systems to help local organisations listen, learn and improve.');
 requireNotIncludes('wireframe evidence headline removed', 'Proof sits in the layout as objects, not decoration.');
 requireNotIncludes('wireframe evidence body removed', "Evidence objects connect the organisation's claims to actual");
@@ -204,22 +182,17 @@ requireContentNotIncludes('content source old field nav removed', 'Recommended n
 requireContentNotIncludes('content source old partner ledger label removed', 'Section label:\nPartner ledger');
 requireContentNotIncludes('content source old advisory headline removed', 'Headline:\nBuild the concept, prove the case, connect the coalition.');
 
-const atlasMarkup = html.match(/<div class="atlas-object[\s\S]*?<\/div>\s*<div class="partner-ledger"/)?.[0] || '';
-if (/src="images\/posters\//.test(atlasMarkup)) failures.push('hero partner images: atlas object still uses poster assets');
+if (/images\/posters\//.test(heroMarkup + js)) failures.push('hero partner images: still uses poster assets');
 else pass.push('hero partner images use non-poster assets');
-requireIncludes('hero image switch data primary', 'data-image-primary=');
-requireIncludes('hero image switch data secondary', 'data-image-secondary=');
-requireIncludes('hero image switch data proof', 'data-image-proof=');
-requireSiteIncludes('partner strip mobile horizontal scroll', 'grid-auto-flow: column;');
-requireSiteIncludes('partner strip mobile card width', 'grid-auto-columns: minmax(220px, 76vw);');
-requireSiteIncludes('partner strip mobile snap', 'scroll-snap-type: x mandatory;');
-requireSiteIncludes('partner strip rows snap', 'scroll-snap-align: start;');
-if (js.includes('heroPartnerImages') && js.includes('switchHeroPartnerImages') && js.includes('is-switching')) pass.push('hero image switcher script');
-else failures.push('hero image switcher script: missing partner image switch behavior');
-if (css.includes('.brand-mark img') && css.includes('.object-medallion img') && css.includes('object-fit: contain')) pass.push('logo render contains full artwork');
-else failures.push('logo render: expected full artwork contain styling');
-if (css.includes('hero-image-exit') && css.includes('hero-image-enter')) pass.push('hero image entry exit animation');
-else failures.push('hero image entry/exit animation: missing keyframes');
+if (js.includes('heroPartnerImages') && js.includes('HERO_STEP_MS')) pass.push('hero collage script');
+else failures.push('hero collage script: missing partner photo sequence');
+for (const caption of ['Royal Spotlight: Yaden&rsquo;s Story', 'Bokoboko Wellness Haven', 'Bokoboko Eco-Healing Resort', 'Nature&rsquo;s Wealth: Herbal Healing', 'Youth Voices Through Performance', "Earth enterprise, wellness - Kenya's 1st Lady", 'Carledorian Coffee: Brewing with a Purpose']) {
+  requireIncludes('evidence story caption ' + caption, caption);
+}
+for (const src of [...js.matchAll(/(?:YADEN|SPILLS|CARLEDORIAN) \+ "([^"]+)"/g)]) {
+  const prefix = src[0].startsWith('YADEN') ? 'Yaden East Africa/WhatsApp Image 2026-06-30 at ' : src[0].startsWith('SPILLS') ? 'Spills of Eden/WhatsApp Image 2026-06-30 at ' : 'Carledorian/WhatsApp Image 2026-06-29 at ';
+  requireFile('hero image exists ' + src[1], 'images/events/' + prefix + src[1]);
+}
 
 const imgMatches = [...html.matchAll(/<img\s+[^>]*src="([^"]+)"/g)].map((match) => match[1]).filter((src) => !src.startsWith('http'));
 for (const src of imgMatches) requireFile('image exists ' + src, src);

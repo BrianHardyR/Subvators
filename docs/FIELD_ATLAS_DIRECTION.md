@@ -1,6 +1,6 @@
 # Subvators Hub Field Atlas Direction
 
-Status: high-fidelity prototype direction, July 1, 2026.
+Status: superseded. The site now follows the design system in `DESIGN.md` (ledger layout, Besley and Figtree, no side rail or section counter). This file is kept as a record of the earlier direction only.
 
 ## Why This Direction
 
