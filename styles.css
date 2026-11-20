@@ -53,8 +53,9 @@
   --fast: 150ms;
   --medium: 400ms;
   --slow: 800ms;
-  --pass: 1200ms;
+  --pass: 1400ms;
   --ease: cubic-bezier(0.2, 0.7, 0.1, 1);
+  --ease-pass: cubic-bezier(0.6, -0.2, 0.2, 1); /* dips back a little before it moves */
 }
 
 * { box-sizing: border-box; }
@@ -254,7 +255,7 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
 .hero-caption { display: grid; gap: 6px; min-width: 0; }
 .hero-caption.is-swapping { animation: caption-in var(--medium) var(--ease) both; }
 
-/* Pass: a photo arrives small at the front, grows into the main place, steps back, then leaves.
+/* Pass: a photo slides out from behind the main photo, grows into the main place, steps back, then leaves.
    Never more than three on screen. */
 .hero-stage { grid-area: stage; position: relative; aspect-ratio: 1 / 0.9; width: 100%; }
 
@@ -269,15 +270,18 @@ h2 { font-size: var(--size-heading); line-height: 1.08; text-wrap: balance; }
   outline: 6px solid var(--paper);
   background: var(--paper-shade);
   transform-origin: 0 0;
-  transition: transform var(--pass) var(--ease), opacity var(--slow) var(--ease);
+  /* The stacking order swaps part-way through the move, while the photos are travelling fastest. */
+  transition: transform var(--pass) var(--ease-pass) var(--wait, 0ms), opacity var(--fade, var(--slow)) var(--ease) var(--fade-wait, var(--wait, 0ms)), z-index 0s linear calc(var(--pass) * 0.45);
   will-change: transform, opacity;
 }
 
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-.hero-photo[data-pos="0"] { transform: translate(58%, 142%) scale(0.5); opacity: 0; z-index: 4; }
-.hero-photo[data-pos="1"] { transform: translate(41%, 111.8%) scale(0.7); z-index: 3; }
-.hero-photo[data-pos="2"] { transform: translate(0, 38%) scale(1); z-index: 2; }
-.hero-photo[data-pos="3"] { transform: translate(88%, 0) scale(0.58); z-index: 1; }
+/* Waiting hidden behind the main photo, then sliding out from under its bottom edge. */
+.hero-photo[data-pos="0"] { transform: translate(24%, 64%) scale(0.6); opacity: 0; z-index: 0; }
+/* It waits until the new main photo has landed, so it is only ever seen emerging from behind it. */
+.hero-photo[data-pos="1"] { transform: translate(41%, 118%) scale(0.7); z-index: 2; --wait: 620ms; --fade: var(--fast); --fade-wait: 1000ms; }
+.hero-photo[data-pos="2"] { transform: translate(0, 38%) scale(1); z-index: 4; --wait: 120ms; }
+.hero-photo[data-pos="3"] { transform: translate(88%, 0) scale(0.58); z-index: 1; --wait: 60ms; }
 .hero-photo[data-pos="4"] { transform: translate(118%, -26%) scale(0.42); opacity: 0; z-index: 0; }
 
 /* ---- sections ---- */

@@ -249,8 +249,10 @@ mobile menu. The sticky header has a hairline, not a shadow.
 
 ## Motion
 
-Seven named moves, three durations (150, 400, 800ms) plus one slower 1200ms
-for the hero, and one easing curve: `cubic-bezier(0.2, 0.7, 0.1, 1)`.
+Seven named moves, three durations (150, 400, 800ms) plus one slower 1400ms
+for the hero, and one easing curve: `cubic-bezier(0.2, 0.7, 0.1, 1)`. The hero
+Pass alone uses an anticipating curve, `cubic-bezier(0.6, -0.2, 0.2, 1)`, which
+dips back slightly before it moves.
 
 | Move | What it does | Timing |
 | --- | --- | --- |
@@ -259,7 +261,7 @@ for the hero, and one easing curve: `cubic-bezier(0.2, 0.7, 0.1, 1)`.
 | Wipe | Photos are uncovered left to right as they enter, and a story as it opens. | 800ms |
 | Settle | A photo eases from 108% to rest as it is uncovered, and to 105% under the pointer. | 800ms |
 | Follow | A partner's name steps 8px toward its detail under the pointer. A story caption rises under the pointer and the other photos step back. | 400ms |
-| Pass | Hero photos arrive small at the front, grow into the main place, step back, then leave. Never more than three on screen. | 1200ms, every 4s |
+| Pass | A hero photo slides out from behind the main photo, grows into the main place, steps back, then leaves. Each photo starts a beat after the one ahead of it. Never more than three on screen. | 1400ms, every 4s |
 | Count | The two real figures count up once. | 800ms |
 
 Only the hero collage loops. It has a Pause button and stops when scrolled out

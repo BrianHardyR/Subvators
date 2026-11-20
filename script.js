@@ -160,7 +160,7 @@
       toArray(stage.children).forEach(function (photo) {
         var next = Number(photo.dataset.pos) + 1;
         photo.dataset.pos = next;
-        if (next >= 4) window.setTimeout(function () { photo.remove(); }, 1300);
+        if (next >= 4) window.setTimeout(function () { photo.remove(); }, 2200);
       });
       mainIndex += 1;
       var item = itemAt(mainIndex + 1);
