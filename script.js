@@ -100,12 +100,8 @@
   var INTARCH = EVENTS + "Intarch/";
 
   // To add a partner to the hero, add one entry here: name, label, then three photos (src, alt).
+  // Only use photos that belong to that partner: the caption credits the organisation for each photo.
   var heroPartnerImages = [
-    { name: "COTRR Africa", label: "Field mobilisation", photos: [
-      [SPILLS + "23.43.52.jpeg", "Community resilience field setting connected to health and environment work"],
-      [CARLEDORIAN + "12.59.26 (1).jpeg", "Food security and enterprise product evidence"],
-      [YADEN + "12.05.04 (1).jpeg", "Community mobilisation and dialogue evidence"]
-    ] },
     { name: "YADEN East Africa", label: "Youth civic evidence", photos: [
       [YADEN + "23.41.47.jpeg", "YADEN East Africa community dialogue session"],
       [YADEN + "23.42.09 (2).jpeg", "YADEN East Africa strategic engagement activity"],
@@ -115,11 +111,6 @@
       [SPILLS + "17.24.02.jpeg", "Spills of Eden nature-based wellness activity"],
       [SPILLS + "23.43.52.jpeg", "Spills of Eden restorative space visit"],
       [SPILLS + "23.43.23 (1).jpeg", "Spills of Eden wellness and local knowledge evidence"]
-    ] },
-    { name: "My Guardian", label: "Protection pathways", photos: [
-      [YADEN + "23.42.05 (1).jpeg", "Community protection dialogue evidence"],
-      [YADEN + "23.42.08 (2).jpeg", "Strategic protection and civic engagement evidence"],
-      [SPILLS + "17.24.00.jpeg", "Community wellbeing environment evidence"]
     ] },
     { name: "Carledorian", label: "Food enterprise", photos: [
       [CARLEDORIAN + "13.02.37.jpeg", "Carledorian food enterprise display"],
@@ -146,7 +137,7 @@
     });
 
     var HERO_STEP_MS = 4000;
-    var mainIndex = 3; // the photo in the main place; matches the markup in index.html
+    var mainIndex = 0; // the photo in the main place; matches the markup in index.html
     var paused = false;
     var offscreen = false;
     var timer = null;
@@ -247,7 +238,7 @@
       viewerImage.alt = img.alt;
       void viewerImage.offsetWidth;
       viewerImage.classList.add("is-entering");
-      viewerTitle.textContent = tile.querySelector(".tile-caption").textContent;
+      viewerTitle.textContent = tile.querySelector(".tile-caption").firstChild.textContent.trim();
       viewerWho.textContent = tile.dataset.who || "";
       viewerCount.textContent = (current + 1) + " of " + tiles.length;
       if (viewer.hidden) {

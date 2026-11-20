@@ -115,24 +115,6 @@ components:
     typography: "{typography.body-sm}"
     rounded: "{rounded.md}"
     padding: 12px
-  pillar-earth:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  pillar-health:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.on-secondary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 4px
-  pillar-wealth:
-    backgroundColor: "{colors.tertiary}"
-    textColor: "{colors.on-tertiary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 4px
   caption:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.muted}"
@@ -169,9 +151,9 @@ Five rules decide every choice:
 4. **Photos are evidence.** Straight, never tilted, never with text laid over
    faces. They form a collage in two places: at most three overlapping photos
    in the hero, and the eleven-photo mosaic in Evidence stories.
-5. **Earth, Health, Wealth is a system.** Each pillar has a colour and a tag.
-   Partners are tagged with the pillars they serve. These tags are the only
-   pills on the site and the only place gold is a fill.
+5. **Every photo names its organisation.** Evidence plates, mosaic captions
+   and the hero label each credit the partner the photo belongs to. A photo is
+   never shown under another organisation's name.
 
 The logo lockup is artwork. Do not rebuild the wordmark or the script tagline
 with live type.
@@ -188,11 +170,11 @@ Nine colours, each with one job.
 - **On-surface / Ink (#111611):** headings and body text.
 - **Muted (#5C665F):** secondary text and captions.
 - **Primary / Forest (#01331A):** primary button, Evidence sections, contact
-  band, Earth tag.
+  band.
 - **Primary hover (#1B4E21):** hover state of forest only.
 - **Secondary / Burgundy (#701011):** labels, the open or active item, the
-  Strategic advisory band, Health tag. Never a button on paper.
-- **Tertiary / Gold (#FDD37F):** labels on dark bands, focus ring, Wealth tag.
+  Strategic advisory band. Never a button on paper.
+- **Tertiary / Gold (#FDD37F):** labels on dark bands and the focus ring.
   Never text on paper.
 
 Hairlines are Border (#D8D6CC) on paper and white at 22% on dark bands. The
@@ -247,18 +229,17 @@ mobile menu. The sticky header has a hairline, not a shadow.
 
 ## Shapes
 
-8px corners on buttons and photos. Fully round on pillar tags only. No mixed
-corners.
+8px corners on buttons and photos. No pills. No mixed corners.
 
 ## Components
 
 - **Section head:** label, heading, optional lead. Identical in every section.
 - **Ledger row:** title and description on a hairline. Numbered only for the
   five-step model. The partner version expands, one row open at a time, and
-  carries the partner's meta line and pillar tags.
+  carries the partner's meta line.
 - **Buttons:** primary (forest), outline, and paper for dark bands.
 - **Stat strip:** open, ruled above, no boxes.
-- **Evidence plate:** photo with its caption underneath.
+- **Evidence plate:** photo with its caption and organisation underneath.
 - **Hero collage:** at most three overlapping photos with a paper edge. The
   partner label and Pause button sit under it.
 - **Evidence stories mosaic:** eleven photos in uneven sizes. A photo's caption
@@ -295,4 +276,4 @@ animates and the collage holds still.
 - Don't use gold as text on paper, or burgundy as a button on paper.
 - Don't tilt photos, lay text over faces, or add looping animation beyond the
   hero collage.
-- Don't use pills for anything except pillar tags.
+- Don't use pills.

@@ -18,6 +18,8 @@ expect(count(index, /<section class="(?:hero|section)\b/g) === 9 && index.includ
 expect(count(index, /class="partner(?: is-open)?"/g) >= 5, "Partner ecosystem must list at least five partners.");
 expect(count(index, /class="tile"/g) === 11, "Evidence stories must show eleven photos.");
 expect(count(index, /class="hero-photo"/g) === 3, "Hero must start with exactly three photos.");
+expect(count(index, /class="credit"/g) === 15, "Every evidence plate and mosaic photo must name its organisation.");
+expect(index.indexOf('class="title">YADEN East Africa') < index.indexOf('class="title">The Swarm Initiative') && index.indexOf('class="title">The Swarm Initiative') < index.indexOf('class="title">COTRR Africa'), "Partner order starts YADEN East Africa, then The Swarm Initiative.");
 expect(index.includes("data-hero-pause"), "Hero collage must have a pause control.");
 expect(count(index, /class="row row-numbered"/g) === 5, "Only the five-step model is numbered.");
 expect(!/rail|data-section-counter|data-hero-word/.test(index), "The side rail, section counter and typing headline were removed.");
